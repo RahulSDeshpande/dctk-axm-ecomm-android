@@ -1,3 +1,3 @@
-package com.rahulografy.axmecomm.data.remote.modilehandsets.model
+package com.rahulografy.axmecomm.data.remote.mobilehandsets.model
 
 class MobileHandsetsResponse : ArrayList<MobileHandsetResponse>()

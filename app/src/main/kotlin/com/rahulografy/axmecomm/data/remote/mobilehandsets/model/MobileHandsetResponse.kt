@@ -1,4 +1,4 @@
-package com.rahulografy.axmecomm.data.remote.modilehandsets.model
+package com.rahulografy.axmecomm.data.remote.mobilehandsets.model
 
 import com.google.gson.annotations.SerializedName
 
