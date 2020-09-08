@@ -13,6 +13,7 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,6 +28,7 @@ class NetworkModule {
         OkHttpClient
             .Builder()
             .addNetworkInterceptor(StethoInterceptor())
+            .addNetworkInterceptor(HttpLoggingInterceptor())
             .connectTimeout(CONNECTION, TimeUnit.SECONDS)
             .writeTimeout(WRITE, TimeUnit.SECONDS)
             .readTimeout(READ, TimeUnit.SECONDS)
