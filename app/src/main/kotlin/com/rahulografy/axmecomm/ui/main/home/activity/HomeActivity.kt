@@ -13,6 +13,5 @@ class HomeActivity : BaseActivity<ActivityMainBinding, HomeActivityViewModel>() 
 
     override val bindingVariable get() = BR.viewModel
 
-    override fun initUi() {
-    }
+    override fun initUi() {}
 }
