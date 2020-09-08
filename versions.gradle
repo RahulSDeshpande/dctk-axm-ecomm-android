@@ -96,7 +96,7 @@ deps.stetho = stetho
 ext.deps = deps
 
 def build_versions = [:]
-build_versions.min_sdk = 15
+build_versions.min_sdk = 19
 build_versions.target_sdk = 28
 build_versions.versionCode = 1
 build_versions.versionName = "1.0"

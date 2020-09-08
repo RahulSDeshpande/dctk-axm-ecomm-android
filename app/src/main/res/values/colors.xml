@@ -4,7 +4,13 @@
     <color name="colorPrimaryDark">#d25604</color>
     <color name="colorAccent">#ff6600</color>
 
+    <color name="grey_1">#A6A6A6</color>
+
     <color name="black_15">#26000000</color>
     <color name="black_55">#8C000000</color>
     <color name="black_85">#D9000000</color>
+
+    <color name="product_info_bg_gradient_start">#20000000</color>
+    <color name="product_info_bg_gradient_center">#20000000</color>
+    <color name="product_info_bg_gradient_end">#20000000</color>
 </resources>
