@@ -5,15 +5,17 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.rahulografy.axmecomm.R
-import com.rahulografy.axmecomm.data.remote.mobilehandsets.model.MobileHandsetResponse
-import com.rahulografy.axmecomm.data.remote.mobilehandsets.model.MobileHandsetsResponse
+import com.rahulografy.axmecomm.ui.base.model.BaseProductItem
 import com.rahulografy.axmecomm.ui.main.home.fragment.HomeViewModel
 import com.rahulografy.axmecomm.ui.main.home.fragment.listener.ProductEventListener
+import com.rahulografy.axmecomm.ui.main.home.fragment.model.ProductItem
+import com.rahulografy.axmecomm.ui.main.home.fragment.model.toProductItem
 
-class MobileHandsetsResponse(
-    private var mobileHandsetsResponse: MobileHandsetsResponse,
+// TODO | WIP | CREATE A BaseAdapter WHICH SHOULD HAVE ALL COMMON ADAPTER FEATURES
+class ProductsAdapter(
+    private var listProductItem: ArrayList<ProductItem>,
     private val homeViewModel: HomeViewModel?
-) : ListAdapter<MobileHandsetResponse, ProductViewHolder>(ProductsDiffUtilItemCallback()) {
+) : ListAdapter<ProductItem, ProductViewHolder>(ProductsDiffUtilItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ProductViewHolder(
@@ -23,21 +25,26 @@ class MobileHandsetsResponse(
             )
         )
 
-    override fun getItemCount() = mobileHandsetsResponse.size
+    override fun getItemCount() = listProductItem.size
 
     override fun onBindViewHolder(viewHolder: ProductViewHolder, position: Int) =
         viewHolder.bind(
-            mobileHandsetResponse = mobileHandsetsResponse[position],
+            productItem = listProductItem[position],
             productEventListener = object : ProductEventListener {
 
-                override fun onItemClicked(mobileHandsetResponse: MobileHandsetResponse) {
-                    homeViewModel?.openMobileHandsetDetails(mobileHandsetResponse)
+                override fun onItemClicked(item: BaseProductItem) {
+                    homeViewModel?.openProductDetails(productItem = item.toProductItem())
                 }
             }
         )
 
-    fun setData(mobileHandsetsResponse: MobileHandsetsResponse) {
-        this.mobileHandsetsResponse = mobileHandsetsResponse
-        submitList(mobileHandsetsResponse)
+    fun setData(listProductItemNew: ArrayList<ProductItem>) {
+        listProductItem = listProductItemNew
+        submitList(listProductItem)
+    }
+
+    fun addData(listProductItemDelta: List<ProductItem>) {
+        listProductItem.addAll(listProductItemDelta)
+        submitList(listProductItem)
     }
 }

@@ -2,10 +2,11 @@ package com.rahulografy.axmecomm.ui.main.home.fragment
 
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
-import com.rahulografy.axmecomm.data.remote.mobilehandsets.model.MobileHandsetResponse
-import com.rahulografy.axmecomm.data.remote.mobilehandsets.model.MobileHandsetsResponse
-import com.rahulografy.axmecomm.data.repository.mobilehandsets.MobileHandsetsRepository
+import com.rahulografy.axmecomm.data.repository.products.ProductsRepository
 import com.rahulografy.axmecomm.ui.base.BaseViewModel
+import com.rahulografy.axmecomm.ui.main.home.fragment.mapper.ProductsMapper
+import com.rahulografy.axmecomm.ui.main.home.fragment.model.ProductItem
+import com.rahulografy.axmecomm.ui.main.home.fragment.model.Products
 import com.rahulografy.axmecomm.util.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -13,19 +14,20 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    private val mobileHandsetsRepository: MobileHandsetsRepository
+    private val productsRepository: ProductsRepository,
+    private val productsMapper: ProductsMapper
 ) : BaseViewModel() {
 
     val isApiCallInProgress = ObservableBoolean(false)
 
-    val mobileHandsets = ObservableField<MobileHandsetsResponse>()
+    val products = ObservableField<Products>()
 
-    val onMobileHandsetClickEvent = SingleLiveEvent<MobileHandsetResponse>()
+    val onProductClickedEvent = SingleLiveEvent<ProductItem>()
 
     private var disposable: Disposable? = null
 
     override fun start() {
-        getMobileHandsets()
+        getProducts()
     }
 
     override fun stop() {
@@ -37,25 +39,29 @@ class HomeViewModel @Inject constructor(
     }
 
     fun refresh() {
-        getMobileHandsets()
+        getProducts()
     }
 
-    private fun getMobileHandsets() {
+    private fun getProducts() {
         disposable =
-            mobileHandsetsRepository
-                .getMobileHandsets()
+            productsRepository
+                .getProducts()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { isApiCallInProgress.set(true) }
-                .doAfterTerminate { isApiCallInProgress.set(false) }
+                .doOnSubscribe {
+                    isApiCallInProgress.set(true)
+                }
+                .doAfterTerminate {
+                    isApiCallInProgress.set(false)
+                }
                 .subscribe({
-                    mobileHandsets.set(it)
+                    products.set(productsMapper.map(it))
                 }, { error ->
                     error.printStackTrace()
                 })
     }
 
-    fun openMobileHandsetDetails(mobileHandsetResponse: MobileHandsetResponse) {
-        onMobileHandsetClickEvent.value = mobileHandsetResponse
+    fun openProductDetails(productItem: ProductItem) {
+        onProductClickedEvent.value = productItem
     }
 }

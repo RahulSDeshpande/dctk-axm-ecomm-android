@@ -1,5 +1,7 @@
 package com.rahulografy.axmecomm.ui.main.home.fragment.model
 
+import com.rahulografy.axmecomm.ui.base.model.BaseProductItem
+
 data class ProductItem(
     val announceDate: Int? = null,
     val audioJack: String? = null,
@@ -13,4 +15,9 @@ data class ProductItem(
     val priceEurString: String? = null,
     val resolution: String? = null,
     val sim: String? = null
-)
+) : BaseProductItem()
+
+/**
+ * Returns object of [ProductItem] converted from [BaseProductItem]
+ */
+fun BaseProductItem.toProductItem() = this as ProductItem

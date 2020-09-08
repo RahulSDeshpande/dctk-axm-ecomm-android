@@ -1,8 +1,8 @@
-package com.rahulografy.axmecomm.data.remote.mobilehandsets.model
+package com.rahulografy.axmecomm.data.remote.products.model
 
 import com.google.gson.annotations.SerializedName
 
-data class MobileHandsetResponse(
+data class ProductResponse(
     @SerializedName("announceDate") val announceDate: Int?,
     @SerializedName("audioJack") val audioJack: String?,
     @SerializedName("battery") val battery: String?,
