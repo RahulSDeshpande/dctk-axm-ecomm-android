@@ -26,7 +26,7 @@
             app:titleTextColor="@android:color/white" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refresh_layout"
+            android:id="@+id/srl_home"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,7 +34,7 @@
             app:onRefreshListener="@{() -> viewModel.refresh()}">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_news"
+                android:id="@+id/rv_products"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
