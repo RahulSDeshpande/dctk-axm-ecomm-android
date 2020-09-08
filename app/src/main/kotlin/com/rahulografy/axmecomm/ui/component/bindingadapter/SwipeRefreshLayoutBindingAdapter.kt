@@ -1,4 +1,4 @@
-package com.rahulografy.axmecomm.util.ext
+package com.rahulografy.axmecomm.ui.component.bindingadapter
 
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout

@@ -54,4 +54,8 @@ class HomeViewModel @Inject constructor(
                     error.printStackTrace()
                 })
     }
+
+    fun openMobileHandsetDetails(mobileHandsetResponse: MobileHandsetResponse) {
+        onMobileHandsetClickEvent.value = mobileHandsetResponse
+    }
 }
