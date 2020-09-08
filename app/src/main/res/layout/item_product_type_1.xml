@@ -15,8 +15,8 @@
             name="productEventListener"
             type="com.rahulografy.axmecomm.ui.main.home.fragment.listener.ProductEventListener" />
     </data>
-    <!--
-        <com.google.android.material.card.MaterialCardView
+
+    <!--<com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/space_small"

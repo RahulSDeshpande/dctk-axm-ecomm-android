@@ -2,7 +2,7 @@ package com.rahulografy.axmecomm.ui.main.home.fragment.mapper
 
 import com.rahulografy.axmecomm.data.remote.products.model.ProductResponse
 import com.rahulografy.axmecomm.data.remote.products.model.ProductsResponse
-import com.rahulografy.axmecomm.ui.base.BaseMapper
+import com.rahulografy.axmecomm.ui.base.mapper.BaseMapper
 import com.rahulografy.axmecomm.ui.main.home.fragment.model.ProductItem
 import com.rahulografy.axmecomm.ui.main.home.fragment.model.Products
 import com.rahulografy.axmecomm.util.ext.amountize
