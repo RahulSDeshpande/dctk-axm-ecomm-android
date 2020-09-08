@@ -81,6 +81,9 @@ dependencies {
     implementation deps.glide.runtime
     annotationProcessor deps.glide.compiler
 
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    // RecyclerView Item Animators
+    implementation deps.recyclerViewAnimators.recyclerViewAnimators
+
+    // implementation 'com.google.android.material:material:1.2.1'
+    // implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }

@@ -1,3 +1,3 @@
 package com.rahulografy.axmecomm.ui.main.home.fragment.model
 
-class Products : ArrayList<ProductItem>()
+data class Products(val products: List<ProductItem>)

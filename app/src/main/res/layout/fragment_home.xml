@@ -8,7 +8,11 @@
 
         <variable
             name="viewModel"
-            type="com.rahulografy.axmecomm.ui.main.home.fragment.HomeViewModel" />
+            type="com.rahulografy.axmecomm.ui.main.home.fragment.HomeFragmentViewModel" />
+
+        <variable
+            name="productAdapter"
+            type="com.rahulografy.axmecomm.ui.main.home.fragment.adapter.ProductAdapter" />
 
     </data>
 
@@ -31,12 +35,14 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:onRefreshListener="@{() -> viewModel.refresh()}">
+            app:onRefreshListener="@{() -> viewModel.getProducts(true)}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_products"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:adapter="@{productAdapter}"
+                app:items="@{viewModel.products.products}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
