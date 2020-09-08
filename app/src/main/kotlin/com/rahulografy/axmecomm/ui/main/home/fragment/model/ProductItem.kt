@@ -9,7 +9,8 @@ data class ProductItem(
     val id: Int? = null,
     val phone: String? = null,
     val picture: String? = null,
-    val priceEur: Int? = null,
+    val priceEurInt: Int? = null,
+    val priceEurString: String? = null,
     val resolution: String? = null,
     val sim: String? = null
 )
