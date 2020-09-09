@@ -5,12 +5,10 @@ import com.rahulografy.axmecomm.data.repository.products.ProductsDataSource
 import com.rahulografy.axmecomm.di.qualifier.RemoteData
 import dagger.Binds
 import dagger.Module
-import javax.inject.Singleton
 
 @Module
 abstract class RepositoryModule {
 
-    @Singleton
     @Binds
     @RemoteData
     abstract fun bindProductsRemoteDataSource(

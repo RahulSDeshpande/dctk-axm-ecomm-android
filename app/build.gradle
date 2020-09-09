@@ -79,7 +79,7 @@ dependencies {
 
     // Glide
     implementation deps.glide.runtime
-    annotationProcessor deps.glide.compiler
+    kapt deps.glide.compiler
 
     // RecyclerView Item Animators
     implementation deps.recyclerViewAnimators.recyclerViewAnimators
@@ -87,6 +87,9 @@ dependencies {
     // Picasso
     implementation deps.picasso.picasso
 
-    // implementation 'com.google.android.material:material:1.2.1'
-    // implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    // ViewPager2
+    implementation deps.viewpager2.viewpager2
+
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }
