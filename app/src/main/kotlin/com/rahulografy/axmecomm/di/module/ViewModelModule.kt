@@ -11,7 +11,12 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import javax.inject.Singleton
 
-@Module(includes = [AppModule::class, RepositoryModule::class])
+@Module(
+    includes = [
+        AppModule::class,
+        RepositoryModule::class
+    ]
+)
 abstract class ViewModelModule {
 
     @Singleton
