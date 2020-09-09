@@ -9,6 +9,6 @@ fun SwipeRefreshLayout.isRefreshing(isRefreshing: Boolean) {
 }
 
 @BindingAdapter("app:onRefreshListener")
-fun SwipeRefreshLayout.setOnRefreshListener(func: () -> Unit) {
-    setOnRefreshListener { func() }
+fun SwipeRefreshLayout.setOnRefreshListener(function: () -> Unit) {
+    setOnRefreshListener { function() }
 }

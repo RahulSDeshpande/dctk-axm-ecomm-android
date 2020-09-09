@@ -37,15 +37,16 @@ class HomeFragmentViewModel @Inject constructor(
                     .doOnSubscribe {
                         isApiCallInProgress.set(true)
                     }
-                    .doAfterTerminate {
-                        isApiCallInProgress.set(false)
-                    }
                     .subscribe({
+                        isApiCallInProgress.set(false)
                         products.set(productsMapper.map(it))
                     }, { error ->
+                        isApiCallInProgress.set(false)
                         error.printStackTrace()
                     })
             )
+        } else {
+            products.notifyChange()
         }
     }
 
