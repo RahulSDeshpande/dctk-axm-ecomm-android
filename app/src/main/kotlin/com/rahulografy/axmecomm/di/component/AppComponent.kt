@@ -1,8 +1,7 @@
 package com.rahulografy.axmecomm.di.component
 
 import com.rahulografy.axmecomm.AxmEcommApp
-import com.rahulografy.axmecomm.di.module.AppModule
-import com.rahulografy.axmecomm.di.module.RepositoryModule
+import com.rahulografy.axmecomm.di.module.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -14,7 +13,10 @@ import javax.inject.Singleton
     modules = [
         AndroidSupportInjectionModule::class,
         AppModule::class,
-        RepositoryModule::class
+        RepositoryModule::class,
+        NetworkModule::class,
+        ActivityBindingModule::class,
+        ViewModelModule::class
     ]
 )
 interface AppComponent : AndroidInjector<AxmEcommApp> {

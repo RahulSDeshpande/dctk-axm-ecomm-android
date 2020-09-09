@@ -25,7 +25,7 @@ object RecyclerViewBindingAdapter {
     @BindingAdapter("app:adapter")
     @JvmStatic
     fun RecyclerView?.setAdapter(
-        productAdapter: ProductAdapter
+        productAdapter: ProductAdapter?
     ) {
         this?.apply {
             grid()
@@ -36,7 +36,7 @@ object RecyclerViewBindingAdapter {
     @BindingAdapter("app:items")
     @JvmStatic
     fun RecyclerView?.setProducts(
-        items: List<ProductItem>
+        items: List<ProductItem>?
     ) {
         with(this?.adapter as ProductAdapter?) {
             this?.setData(items)

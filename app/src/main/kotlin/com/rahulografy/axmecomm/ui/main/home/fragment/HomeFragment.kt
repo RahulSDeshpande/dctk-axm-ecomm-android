@@ -10,13 +10,13 @@ import com.rahulografy.axmecomm.util.ext.toast
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() {
 
-    private lateinit var productAdapter: ProductAdapter
+    override val layoutRes get() = R.layout.fragment_home
 
     override var viewModelClass = HomeFragmentViewModel::class.java
 
     override val bindingVariable = BR.viewModel
 
-    override val layoutRes get() = R.layout.fragment_home
+    private lateinit var productAdapter: ProductAdapter
 
     override fun initUi() {
 
