@@ -43,7 +43,7 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
     }
 
     @MainThread
-    fun call() {
+    fun reset() {
         value = null
     }
 }

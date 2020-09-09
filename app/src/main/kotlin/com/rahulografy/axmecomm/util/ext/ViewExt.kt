@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.rahulografy.axmecomm.R
 import com.squareup.picasso.Picasso
@@ -20,7 +21,7 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
  * Set up RecyclerView LIST with default configurations like:
  *
  * * VERTICAL ->
- *   - itemAnimator -> FadeInDownAnimator
+ *   - itemAnimator -> FadeInUpAnimator
  *   - layoutManager -> LinearLayoutManager.VERTICAL
  *
  * * HORIZONTAL ->
@@ -50,7 +51,7 @@ fun RecyclerView.setup(isVertical: Boolean = true) {
  * Set up RecyclerView GRID with default configurations like:
  *
  * * VERTICAL ->
- *   - itemAnimator -> FadeInDownAnimator
+ *   - itemAnimator -> FadeInUpAnimator
  *   - layoutManager -> LinearLayoutManager.VERTICAL
  *
  * * HORIZONTAL ->
@@ -74,6 +75,34 @@ fun RecyclerView.grid(isVertical: Boolean = true, spanCount: Int = 2) {
                 spanCount,
                 LinearLayoutManager.HORIZONTAL,
                 false
+            )
+        }
+}
+
+/**
+ * Set up RecyclerView STAGGERED GRID with default configurations like:
+ *
+ * * VERTICAL ->
+ *   - itemAnimator -> FadeInUpAnimator
+ *   - layoutManager -> LinearLayoutManager.VERTICAL
+ *
+ * * HORIZONTAL ->
+ *   - itemAnimator -> FadeInRightAnimator
+ *   - layoutManager -> LinearLayoutManager.HORIZONTAL
+ */
+fun RecyclerView.gridStaggered(isVertical: Boolean = true, spanCount: Int = 2) {
+    layoutManager =
+        if (isVertical) {
+            itemAnimator = FadeInUpAnimator()
+            StaggeredGridLayoutManager(
+                spanCount,
+                LinearLayoutManager.VERTICAL
+            )
+        } else {
+            itemAnimator = FadeInRightAnimator()
+            StaggeredGridLayoutManager(
+                spanCount,
+                LinearLayoutManager.HORIZONTAL
             )
         }
 }
