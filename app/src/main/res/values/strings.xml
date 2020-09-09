@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">AxmEcomm</string>
     <string name="title_home">AxmEcomm Store</string>
+    <string name="ok">OK</string>
+    <string name="cart">Cart</string>
+    <string name="search">Search &amp; Filter</string>
+    <string name="filter">Filter</string>
 </resources>
