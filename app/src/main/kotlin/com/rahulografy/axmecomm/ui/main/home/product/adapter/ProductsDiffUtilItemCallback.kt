@@ -1,7 +1,7 @@
-package com.rahulografy.axmecomm.ui.main.home.fragment.adapter
+package com.rahulografy.axmecomm.ui.main.home.product.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.rahulografy.axmecomm.ui.main.home.fragment.model.ProductItem
+import com.rahulografy.axmecomm.ui.main.home.product.model.ProductItem
 
 class ProductsDiffUtilItemCallback : DiffUtil.ItemCallback<ProductItem>() {
 
