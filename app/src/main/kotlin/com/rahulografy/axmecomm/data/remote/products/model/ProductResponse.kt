@@ -3,7 +3,7 @@ package com.rahulografy.axmecomm.data.remote.products.model
 import com.google.gson.annotations.SerializedName
 
 data class ProductResponse(
-    @SerializedName("announceDate") val announceDate: Int?,
+    @SerializedName("announceDate") val announceDate: String?,
     @SerializedName("audioJack") val audioJack: String?,
     @SerializedName("battery") val battery: String?,
     @SerializedName("brand") val brand: String?,

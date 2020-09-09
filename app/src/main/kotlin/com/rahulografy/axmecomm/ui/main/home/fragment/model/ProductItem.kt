@@ -3,7 +3,7 @@ package com.rahulografy.axmecomm.ui.main.home.fragment.model
 import com.rahulografy.axmecomm.ui.base.model.BaseProductItem
 
 data class ProductItem(
-    val announceDate: Int? = null,
+    val announceDate: String? = null,
     val audioJack: String? = null,
     val battery: String? = null,
     val brand: String? = null,
