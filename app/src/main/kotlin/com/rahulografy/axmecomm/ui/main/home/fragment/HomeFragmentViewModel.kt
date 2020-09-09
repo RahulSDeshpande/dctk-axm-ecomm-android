@@ -28,7 +28,7 @@ class HomeFragmentViewModel @Inject constructor(
     }
 
     fun getProducts(forceApi: Boolean = false) {
-        if (forceApi || products.get()?.products.isNullOrEmpty().not()) {
+        if (forceApi || products.get()?.products.isNullOrEmpty()) {
             addDisposable(
                 disposable = productsRepository
                     .getProducts()

@@ -10,7 +10,11 @@
     <color name="black_55">#8C000000</color>
     <color name="black_85">#D9000000</color>
 
-    <color name="product_info_bg_gradient_start">#20000000</color>
-    <color name="product_info_bg_gradient_center">#20000000</color>
-    <color name="product_info_bg_gradient_end">#20000000</color>
+    <color name="product_info_bg_gradient_start">#60000000</color>
+    <color name="product_info_bg_gradient_center">#60000000</color>
+    <color name="product_info_bg_gradient_end">#60000000</color>
+
+    <color name="default_text_color">#252727</color>
+    <color name="default_text_color_1">#797E7E</color>
+    <color name="default_text_color_white">#FFFFFF</color>
 </resources>

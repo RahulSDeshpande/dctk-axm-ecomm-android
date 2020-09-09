@@ -22,6 +22,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
 
         productAdapter = ProductAdapter(homeFragmentViewModel = viewModel)
 
+        viewDataBinding.productAdapter = productAdapter
+        viewDataBinding.executePendingBindings()
+
         viewModel.getProducts()
 
         viewModel

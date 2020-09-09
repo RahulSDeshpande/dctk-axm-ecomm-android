@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import jp.wasabeef.recyclerview.animators.FadeInDownAnimator
 import jp.wasabeef.recyclerview.animators.FadeInRightAnimator
+import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 
 /**
  * Set up RecyclerView LIST with default configurations like:
@@ -53,7 +54,7 @@ fun RecyclerView.setup(isVertical: Boolean = true) {
 fun RecyclerView.grid(isVertical: Boolean = true, spanCount: Int = 2) {
     layoutManager =
         if (isVertical) {
-            itemAnimator = FadeInDownAnimator()
+            itemAnimator = FadeInUpAnimator()
             GridLayoutManager(
                 context,
                 spanCount,
