@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.rahulografy.axmecomm.ui.main.home.product.ProductFragmentViewModel" />
+
+        <variable
+            name="productAdapter"
+            type="com.rahulografy.axmecomm.ui.main.home.product.adapter.ProductAdapter" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_products"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:padding="@dimen/space_tiny"
+            app:adapter="@{productAdapter}"
+            app:items="@{viewModel.products.products}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="5"
+            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:listitem="@layout/item_product_type_1"
+            tools:spanCount="2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
