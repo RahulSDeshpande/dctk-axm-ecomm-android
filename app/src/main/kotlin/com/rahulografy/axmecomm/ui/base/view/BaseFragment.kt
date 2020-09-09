@@ -71,9 +71,17 @@ abstract class BaseFragment<VDB : ViewDataBinding, BVM : BaseViewModel> : Dagger
         viewModel.start()
 
         initUi()
+
+        initSharedViewModels()
+
+        initSharedViewModelObservers()
     }
 
     abstract fun initUi()
+
+    open fun initSharedViewModels() {}
+
+    open fun initSharedViewModelObservers() {}
 
     override fun onDestroyView() {
         viewModel.stop()

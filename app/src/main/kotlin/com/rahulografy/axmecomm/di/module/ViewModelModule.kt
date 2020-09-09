@@ -2,14 +2,15 @@ package com.rahulografy.axmecomm.di.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.rahulografy.axmecomm.di.ApplicationScoped
 import com.rahulografy.axmecomm.di.ViewModelKey
 import com.rahulografy.axmecomm.ui.main.home.activity.HomeActivityViewModel
 import com.rahulografy.axmecomm.ui.main.home.fragment.HomeFragmentViewModel
+import com.rahulografy.axmecomm.ui.main.home.product.ProductFragmentViewModel
 import com.rahulografy.axmecomm.util.ViewModelFactory
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import javax.inject.Singleton
 
 @Module(
     includes = [
@@ -19,7 +20,7 @@ import javax.inject.Singleton
 )
 abstract class ViewModelModule {
 
-    @Singleton
+    @ApplicationScoped
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
@@ -32,4 +33,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeFragmentViewModel::class)
     abstract fun bindHomeFragmentViewModel(viewModel: HomeFragmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProductFragmentViewModel::class)
+    abstract fun bindProductFragmentViewModel(viewModel: ProductFragmentViewModel): ViewModel
 }

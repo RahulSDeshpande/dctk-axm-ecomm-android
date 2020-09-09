@@ -3,6 +3,7 @@ package com.rahulografy.axmecomm.di.module
 import android.app.Application
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.rahulografy.axmecomm.data.remote.products.service.ProductsRemoteService
+import com.rahulografy.axmecomm.di.ApplicationScoped
 import com.rahulografy.axmecomm.util.Constants.Network.Api.HEADER_SECRET_KEY_KEY
 import com.rahulografy.axmecomm.util.Constants.Network.Api.HEADER_SECRET_KEY_VALUE
 import com.rahulografy.axmecomm.util.Constants.Network.Api.URL_BASE
@@ -17,12 +18,12 @@ import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.logging.HttpLoggingInterceptor.Level.BODY
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 
 @Module
 class NetworkModule {
@@ -32,7 +33,7 @@ class NetworkModule {
             .Builder()
             .addInterceptor(getHeaderInterceptor())
             .addNetworkInterceptor(StethoInterceptor())
-            .addNetworkInterceptor(HttpLoggingInterceptor())
+            .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(BODY))
             .connectTimeout(CONNECTION, TimeUnit.SECONDS)
             .writeTimeout(WRITE, TimeUnit.SECONDS)
             .readTimeout(READ, TimeUnit.SECONDS)
@@ -58,11 +59,11 @@ class NetworkModule {
         }
 
     @Provides
-    @Singleton
+    @ApplicationScoped
     fun provideOkHttpClient(application: Application) = buildOkHttpClient(application)
 
     @Provides
-    @Singleton
+    @ApplicationScoped
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit
             .Builder()
@@ -73,7 +74,7 @@ class NetworkModule {
             .build()
 
     @Provides
-    @Singleton
+    @ApplicationScoped
     fun provideProductsRemoteService(retrofit: Retrofit): ProductsRemoteService =
         retrofit.create(ProductsRemoteService::class.java)
 }

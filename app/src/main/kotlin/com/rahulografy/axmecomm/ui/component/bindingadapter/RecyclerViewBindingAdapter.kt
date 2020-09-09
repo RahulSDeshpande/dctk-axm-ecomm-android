@@ -5,9 +5,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.HORIZONTAL
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.RecyclerView
-import com.rahulografy.axmecomm.ui.main.home.fragment.adapter.ProductAdapter
-import com.rahulografy.axmecomm.ui.main.home.fragment.model.ProductItem
-import com.rahulografy.axmecomm.util.ext.grid
+import com.rahulografy.axmecomm.ui.main.home.product.adapter.ProductAdapter
+import com.rahulografy.axmecomm.ui.main.home.product.model.ProductItem
+import com.rahulografy.axmecomm.util.ext.gridStaggered
 
 @BindingAdapter("app:isVerticalItemDecoration")
 fun RecyclerView.isVerticalItemDecoration(isVertical: Boolean) {
@@ -24,7 +24,7 @@ fun RecyclerView?.setAdapter(
     productAdapter: ProductAdapter?
 ) {
     this?.apply {
-        grid()
+        gridStaggered()
         adapter = productAdapter
     }
 }

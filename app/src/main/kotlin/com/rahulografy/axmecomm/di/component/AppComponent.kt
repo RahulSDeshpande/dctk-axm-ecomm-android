@@ -1,14 +1,14 @@
 package com.rahulografy.axmecomm.di.component
 
 import com.rahulografy.axmecomm.AxmEcommApp
+import com.rahulografy.axmecomm.di.ApplicationScoped
 import com.rahulografy.axmecomm.di.module.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
-import javax.inject.Singleton
 
-@Singleton
+@ApplicationScoped
 @Component(
     modules = [
         AndroidSupportInjectionModule::class,

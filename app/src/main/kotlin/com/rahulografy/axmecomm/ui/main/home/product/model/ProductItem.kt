@@ -1,4 +1,4 @@
-package com.rahulografy.axmecomm.ui.main.home.fragment.model
+package com.rahulografy.axmecomm.ui.main.home.product.model
 
 import com.rahulografy.axmecomm.ui.base.model.BaseProductItem
 

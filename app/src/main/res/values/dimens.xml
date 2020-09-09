@@ -6,6 +6,9 @@
     <dimen name="space_small">8dp</dimen>
     <dimen name="space_normal">16dp</dimen>
     <dimen name="space_large">32dp</dimen>
+    <dimen name="space_xlarge">40dp</dimen>
+    <dimen name="space_xxlarge">48dp</dimen>
+    <dimen name="space_xxxlarge">56dp</dimen>
 
     // Text size
     <dimen name="text_tiny">12sp</dimen>

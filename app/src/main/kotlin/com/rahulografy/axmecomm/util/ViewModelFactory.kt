@@ -2,11 +2,11 @@ package com.rahulografy.axmecomm.util
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.rahulografy.axmecomm.di.ApplicationScoped
 import javax.inject.Inject
 import javax.inject.Provider
-import javax.inject.Singleton
 
-@Singleton
+@ApplicationScoped
 class ViewModelFactory @Inject constructor(
     private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
