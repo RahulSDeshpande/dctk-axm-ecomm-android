@@ -84,6 +84,9 @@ dependencies {
     // RecyclerView Item Animators
     implementation deps.recyclerViewAnimators.recyclerViewAnimators
 
+    // Picasso
+    implementation deps.picasso.picasso
+
     // implementation 'com.google.android.material:material:1.2.1'
     // implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 }
