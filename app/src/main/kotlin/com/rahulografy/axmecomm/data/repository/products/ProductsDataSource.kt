@@ -1,9 +1,9 @@
 package com.rahulografy.axmecomm.data.repository.products
 
 import com.rahulografy.axmecomm.data.remote.products.model.ProductsResponse
-import io.reactivex.Flowable
+import io.reactivex.Single
 
 interface ProductsDataSource {
 
-    fun getProducts(): Flowable<ProductsResponse>
+    fun getProducts(): Single<ProductsResponse>
 }
