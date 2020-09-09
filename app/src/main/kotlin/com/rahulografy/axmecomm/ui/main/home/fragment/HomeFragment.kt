@@ -1,5 +1,8 @@
 package com.rahulografy.axmecomm.ui.main.home.fragment
 
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -15,12 +18,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
 
     override val layoutRes get() = R.layout.fragment_home
 
+    override val toolbarId: Int get() = R.id.toolbarHome
+
     override var viewModelClass = HomeFragmentViewModel::class.java
 
     override val bindingVariable = BR.viewModel
 
-    override fun initUi() {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_home, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (viewModel.isApiCallInProgress.get()) {
+            toast("Data is being fetched, please wait...")
+        } else {
+            when (item.itemId) {
+                R.id.menu_action_search -> {
+                }
+                R.id.menu_action_filter -> {
+                }
+                R.id.menu_action_cart -> {
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun initUi() {
         viewModel.getProducts()
     }
 

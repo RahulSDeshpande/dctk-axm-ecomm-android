@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
@@ -30,6 +34,9 @@ abstract class BaseFragment<VDB : ViewDataBinding, BVM : BaseViewModel> : Dagger
 
     @get:LayoutRes
     protected abstract val layoutRes: Int
+
+    @get:IdRes
+    protected open val toolbarId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -70,11 +77,26 @@ abstract class BaseFragment<VDB : ViewDataBinding, BVM : BaseViewModel> : Dagger
 
         viewModel.start()
 
+        initToolBar()
+
         initUi()
 
         initSharedViewModels()
 
         initSharedViewModelObservers()
+    }
+
+    private fun initToolBar() {
+        if (toolbarId != 0 && view != null) {
+            getSupportActionBar(requireView().findViewById(toolbarId))
+            setHasOptionsMenu(true)
+        }
+    }
+
+    private fun getSupportActionBar(toolbar: Toolbar): ActionBar? {
+        val activity = (activity as AppCompatActivity)
+        activity.setSupportActionBar(toolbar)
+        return activity.supportActionBar
     }
 
     abstract fun initUi()
