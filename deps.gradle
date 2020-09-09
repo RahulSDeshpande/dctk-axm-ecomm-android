@@ -22,6 +22,7 @@ versions.stetho = "1.5.0"
 versions.glide = "4.8.0"
 versions.recyclerViewAnimators = "4.0.1"
 versions.picasso = "2.71828"
+versions.viewPager2 = "1.0.0"
 
 def deps = [:]
 
@@ -104,6 +105,10 @@ deps.recyclerViewAnimators = recyclerViewAnimators
 def picasso = [:]
 picasso.picasso = "com.squareup.picasso:picasso:$versions.picasso"
 deps.picasso = picasso
+
+def viewpager2 = [:]
+viewpager2.viewpager2 = "androidx.viewpager2:viewpager2:$versions.viewPager2"
+deps.viewpager2 = viewpager2
 
 ext.deps = deps
 
