@@ -41,6 +41,7 @@
                 android:id="@+id/rv_products"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="@dimen/space_tiny"
                 app:adapter="@{productAdapter}"
                 app:items="@{viewModel.products.products}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

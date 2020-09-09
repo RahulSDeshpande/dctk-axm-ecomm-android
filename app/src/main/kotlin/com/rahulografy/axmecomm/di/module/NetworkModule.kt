@@ -3,6 +3,8 @@ package com.rahulografy.axmecomm.di.module
 import android.app.Application
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.rahulografy.axmecomm.data.remote.products.service.ProductsRemoteService
+import com.rahulografy.axmecomm.util.Constants.Network.Api.HEADER_SECRET_KEY_KEY
+import com.rahulografy.axmecomm.util.Constants.Network.Api.HEADER_SECRET_KEY_VALUE
 import com.rahulografy.axmecomm.util.Constants.Network.Api.URL_BASE
 import com.rahulografy.axmecomm.util.Constants.Network.Cache.NAME
 import com.rahulografy.axmecomm.util.Constants.Network.Timeout.CONNECTION
@@ -12,6 +14,7 @@ import com.rahulografy.axmecomm.util.Memory
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -27,6 +30,7 @@ class NetworkModule {
     private fun buildOkHttpClient(application: Application): OkHttpClient =
         OkHttpClient
             .Builder()
+            .addInterceptor(getHeaderInterceptor())
             .addNetworkInterceptor(StethoInterceptor())
             .addNetworkInterceptor(HttpLoggingInterceptor())
             .connectTimeout(CONNECTION, TimeUnit.SECONDS)
@@ -39,6 +43,19 @@ class NetworkModule {
                 )
             )
             .build()
+
+    private fun getHeaderInterceptor() =
+        Interceptor { chain ->
+            val requestBuilder =
+                chain.request()
+                    .newBuilder()
+                    .addHeader(
+                        HEADER_SECRET_KEY_KEY,
+                        HEADER_SECRET_KEY_VALUE
+                    )
+
+            chain.proceed(requestBuilder.build())
+        }
 
     @Provides
     @Singleton

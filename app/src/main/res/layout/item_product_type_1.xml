@@ -29,7 +29,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:layout_margin="@dimen/space_tiny"
         android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
@@ -41,6 +42,7 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
+            app:imageUrl="@{productItem.picture}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +68,7 @@
                 android:fontFamily="@font/sans_bold"
                 android:maxLines="2"
                 android:text="@{productItem.phone}"
-                android:textColor="@color/black_85"
+                android:textColor="@color/default_text_color_white"
                 android:textSize="@dimen/text_large"
                 app:layout_constraintBottom_toTopOf="@id/tv_product_price"
                 tools:text="Apple Watch Edition Series 2 42mm" />
@@ -78,7 +80,7 @@
                 android:layout_marginTop="@dimen/space_small"
                 android:fontFamily="@font/sans_bold"
                 android:text="@{productItem.priceEurString}"
-                android:textColor="@color/black_55"
+                android:textColor="@color/default_text_color_white"
                 android:textSize="@dimen/text_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="$ 600" />
