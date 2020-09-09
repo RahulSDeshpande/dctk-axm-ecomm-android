@@ -10,10 +10,10 @@ class HomeFragmentViewModel
     val productsManager: ProductsManager
 ) : BaseViewModel() {
 
-    val isApiCallInProgress = ObservableBoolean(false)
+    val isDataProcessing = ObservableBoolean(false)
 
     fun getProducts(forceApi: Boolean = false) {
-        isApiCallInProgress.set(true)
+        isDataProcessing.set(true)
         productsManager.getProducts(forceApi = forceApi)
     }
 }

@@ -30,7 +30,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (viewModel.isApiCallInProgress.get()) {
+        if (viewModel.isDataProcessing.get()) {
             toast("Data is being fetched, please wait...")
         } else {
             when (item.itemId) {
@@ -58,7 +58,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
                 lifecycleOwner = this,
                 observer = Observer {
                     initViewPager(categories = it?.keys)
-                    viewModel.isApiCallInProgress.set(false)
+                    viewModel.isDataProcessing.set(false)
                 }
             )
     }
