@@ -5,4 +5,6 @@
     <string name="cart">Cart</string>
     <string name="search">Search</string>
     <string name="filter">Filter</string>
+    <string name="cancel">Cancel</string>
+    <string name="filter_products">Filter Products</string>
 </resources>
