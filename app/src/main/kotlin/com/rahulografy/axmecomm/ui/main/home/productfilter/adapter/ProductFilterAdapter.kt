@@ -16,7 +16,6 @@ class ProductFilterAdapter(
 ) : BaseListAdapter<ProductFilterCategoryItem, ProductFilterViewHolder>(
     ProductFilterCategoryDiffUtilItemCallback()
 ) {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ProductFilterViewHolder(
             DataBindingUtil.inflate(
