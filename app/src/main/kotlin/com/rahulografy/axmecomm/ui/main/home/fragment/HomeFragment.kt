@@ -4,7 +4,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.lifecycle.Observer
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.rahulografy.axmecomm.BR
 import com.rahulografy.axmecomm.R
@@ -16,6 +15,8 @@ import com.rahulografy.axmecomm.util.ext.toast
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() {
+
+    private var productFilterFragment: ProductFilterFragment? = null
 
     override val layoutRes get() = R.layout.fragment_home
 
@@ -35,10 +36,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
             toast("Data is being fetched, please wait...")
         } else {
             when (item.itemId) {
-                R.id.menu_action_search -> {
-                    val productFilterFragment = ProductFilterFragment()
-                    productFilterFragment.show(childFragmentManager, productFilterFragment.tag)
-                }
+                R.id.menu_action_search -> openProductFilterFragment()
                 R.id.menu_action_filter -> {
                 }
                 R.id.menu_action_cart -> {
@@ -78,16 +76,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
                 )
 
             viewPager2Home?.apply {
-                registerOnPageChangeCallback(
-                    object : ViewPager2.OnPageChangeCallback() {
-                        override fun onPageSelected(position: Int) {
-                            toast("Selected page position: $position")
-                        }
-                    }
-                )
-
                 adapter = productFragmentAdapter
-
                 offscreenPageLimit = categories.size
             }
 
@@ -100,5 +89,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
         } else {
             toast("API error occurred while fetching products.")
         }
+    }
+
+    private fun openProductFilterFragment() {
+        if (productFilterFragment == null) {
+            productFilterFragment = ProductFilterFragment()
+        }
+        productFilterFragment?.show(childFragmentManager, productFilterFragment?.tag)
     }
 }

@@ -16,14 +16,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_normal">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvProductFilterTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sans_bold"
-            android:padding="@dimen/space_normal"
+            android:paddingStart="@dimen/space_normal"
+            android:paddingTop="@dimen/space_small"
+            android:paddingEnd="@dimen/space_normal"
+            android:paddingBottom="@dimen/space_small"
             android:text="@{productFilterCategoryItem.title}"
             android:textColor="@color/default_text_color"
             android:textSize="@dimen/text_medium"

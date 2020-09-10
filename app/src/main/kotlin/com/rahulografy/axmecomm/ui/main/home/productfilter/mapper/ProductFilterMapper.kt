@@ -32,7 +32,7 @@ class ProductFilterMapper
                     value = "brand",
                     title = "Brand",
                     listProductFilterItem = brandList.mapProductFilterItem(),
-                    productfilterType = ProductFilterType.SELECTION_MULTIPLE
+                    productFilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
@@ -41,7 +41,7 @@ class ProductFilterMapper
                     value = "phone",
                     title = "Phone Name",
                     listProductFilterItem = phoneList.mapProductFilterItem(),
-                    productfilterType = ProductFilterType.SELECTION_MULTIPLE
+                    productFilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
@@ -50,7 +50,7 @@ class ProductFilterMapper
                     value = "price",
                     title = "Price",
                     listProductFilterItem = priceList.mapProductFilterItem(),
-                    productfilterType = ProductFilterType.SELECTION_MULTIPLE
+                    productFilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
@@ -59,7 +59,7 @@ class ProductFilterMapper
                     value = "sim",
                     title = "SIM",
                     listProductFilterItem = simList.mapProductFilterItem(),
-                    productfilterType = ProductFilterType.SELECTION_MULTIPLE
+                    productFilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
@@ -68,7 +68,7 @@ class ProductFilterMapper
                     value = "gps",
                     title = "GPS",
                     listProductFilterItem = gpsList.mapProductFilterItem(),
-                    productfilterType = ProductFilterType.SELECTION_MULTIPLE
+                    productFilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
@@ -77,7 +77,7 @@ class ProductFilterMapper
                     value = "audioJack",
                     title = "Audio Jack",
                     listProductFilterItem = audioJackList.mapProductFilterItem(),
-                    productfilterType = ProductFilterType.SELECTION_SINGLE
+                    productFilterType = ProductFilterType.SELECTION_SINGLE
                 )
             )
         }
