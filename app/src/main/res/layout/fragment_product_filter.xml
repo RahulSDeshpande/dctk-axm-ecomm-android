@@ -26,7 +26,7 @@
             android:fontFamily="@font/sans_bold"
             android:padding="@dimen/space_normal"
             android:text="@string/filter_products"
-            android:textColor="@color/default_text_color"
+            android:textColor="@color/default_text_color_1"
             android:textSize="@dimen/text_xlarge"
             app:layout_constraintTop_toTopOf="parent" />
 

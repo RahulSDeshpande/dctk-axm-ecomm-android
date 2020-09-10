@@ -28,12 +28,13 @@
     <color name="product_info_bg_gradient_center">#60000000</color>
     <color name="product_info_bg_gradient_end">#60000000</color>
 
-    <color name="default_text_color">#252727</color>
-    <color name="default_text_color_1">#797E7E</color>
+    <color name="default_text_color_0">#121212</color>
+    <color name="default_text_color_1">#252727</color>
+    <color name="default_text_color_2">#797E7E</color>
     <color name="default_text_color_white">#FFFFFF</color>
 
     <color name="colorChipBackgroundUnselected">@color/colorAccentLighter</color>
     <color name="colorChipBackgroundSelected">@color/colorPrimaryLighter</color>
 
-    <color name="colorChipText">@color/default_text_color</color>
+    <color name="colorChipText">@color/default_text_color_1</color>
 </resources>
