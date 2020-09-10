@@ -8,7 +8,7 @@ import com.rahulografy.axmecomm.ui.main.home.product.model.Products
 import com.rahulografy.axmecomm.util.ext.amountize
 import javax.inject.Inject
 
-class ProductsMapper
+class ProductMapper
 @Inject constructor() : BaseMapper<ProductsResponse, Products> {
 
     override fun map(input: ProductsResponse?) =
@@ -29,4 +29,7 @@ class ProductsMapper
             resolution = resolution,
             sim = sim
         )
+
+    fun groupByCategory(listProductsItem: List<ProductItem>?) =
+        listProductsItem?.groupBy { it.brand.toString() }
 }

@@ -1,27 +1,29 @@
-package com.rahulografy.axmecomm.ui.main.home
+package com.rahulografy.axmecomm.ui.main.home.product.manager
 
 import com.rahulografy.axmecomm.data.remote.products.model.ProductsResponse
 import com.rahulografy.axmecomm.data.repository.products.ProductsRepository
 import com.rahulografy.axmecomm.di.ApplicationScoped
 import com.rahulografy.axmecomm.ui.base.view.BaseViewModel
-import com.rahulografy.axmecomm.ui.main.home.product.mapper.ProductsMapper
+import com.rahulografy.axmecomm.ui.main.home.product.mapper.ProductMapper
 import com.rahulografy.axmecomm.ui.main.home.product.model.ProductItem
 import com.rahulografy.axmecomm.ui.main.home.product.model.Products
+import com.rahulografy.axmecomm.ui.main.home.productfilter.manager.ProductFilterManager
 import com.rahulografy.axmecomm.util.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @ApplicationScoped
-class ProductsManager
+class ProductManager
 @Inject constructor(
     private val productsRepository: ProductsRepository,
-    private val productsMapper: ProductsMapper
+    private val productMapper: ProductMapper,
+    private val productFilterManager: ProductFilterManager
 ) : BaseViewModel() {
 
     private var products = SingleLiveEvent<Products?>()
 
-    var mapCategoryWiseProducts = SingleLiveEvent<Map<String, List<ProductItem>>?>()
+    var mapCategoryWiseProductItems = SingleLiveEvent<Map<String, List<ProductItem>>?>()
 
     fun getProducts(forceApi: Boolean = false) {
 
@@ -39,16 +41,18 @@ class ProductsManager
                     })
             )
         } else {
-            products.reset()
+            mapCategoryWiseProductItems.value = mapCategoryWiseProductItems.value
         }
     }
 
     private fun onProductsReceived(productsResponse: ProductsResponse?) {
-        products.value = productsMapper.map(input = productsResponse)
+        products.value = productMapper.map(input = productsResponse)
 
-        mapCategoryWiseProducts.value = products.value?.products?.groupBy { it.brand.toString() }
+        mapCategoryWiseProductItems.value = productMapper.groupByCategory(products.value?.products)
+
+        productFilterManager.init(products.value?.products)
     }
 
     fun getProductsFiltered(brand: String?) =
-        mapCategoryWiseProducts.value?.get(brand)
+        mapCategoryWiseProductItems.value?.get(brand)
 }

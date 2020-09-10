@@ -10,7 +10,8 @@ import com.rahulografy.axmecomm.BR
 import com.rahulografy.axmecomm.R
 import com.rahulografy.axmecomm.databinding.FragmentHomeBinding
 import com.rahulografy.axmecomm.ui.base.view.BaseFragment
-import com.rahulografy.axmecomm.ui.main.home.ProductFragmentAdapter
+import com.rahulografy.axmecomm.ui.main.home.fragment.adapter.ProductFragmentAdapter
+import com.rahulografy.axmecomm.ui.main.home.productfilter.ProductFilterFragment
 import com.rahulografy.axmecomm.util.ext.toast
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -35,6 +36,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
         } else {
             when (item.itemId) {
                 R.id.menu_action_search -> {
+                    val productFilterFragment = ProductFilterFragment()
+                    productFilterFragment.show(childFragmentManager, productFilterFragment.tag)
                 }
                 R.id.menu_action_filter -> {
                 }
@@ -52,8 +55,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
     override fun initSharedViewModelObservers() {
 
         viewModel
-            .productsManager
-            .mapCategoryWiseProducts
+            .productManager
+            .mapCategoryWiseProductItems
             .observe(
                 lifecycleOwner = this,
                 observer = Observer {
