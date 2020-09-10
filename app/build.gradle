@@ -30,6 +30,13 @@ android {
     dataBinding {
         enabled = true
     }
+
+    android {
+        compileOptions {
+            sourceCompatibility 1.8
+            targetCompatibility 1.8
+        }
+    }
 }
 
 dependencies {
@@ -92,8 +99,4 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-
-    implementation "cn.wzbos.android.widget:filterview:1.0.0"
-
-    implementation "com.arthurivanets.bottomsheet:bottomsheets-core:1.0.0"
 }

@@ -61,7 +61,9 @@ class ProductFilterManager
                 listProductFilterItem = productFilterCategoryItem.listProductFilterItem
                     .filter { productFilterItem ->
                         productFilterItem.isSelected == isSelected
-                    }
+                    },
+                isMandatory = productFilterCategoryItem.isMandatory,
+                productfilterType = productFilterCategoryItem.productfilterType
             )
         }
 
