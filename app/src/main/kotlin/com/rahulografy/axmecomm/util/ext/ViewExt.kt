@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.bumptech.glide.Glide
 import com.rahulografy.axmecomm.R
 import com.squareup.picasso.Picasso
-import jp.wasabeef.recyclerview.animators.FadeInDownAnimator
 import jp.wasabeef.recyclerview.animators.FadeInRightAnimator
 import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
 
@@ -28,10 +27,10 @@ import jp.wasabeef.recyclerview.animators.FadeInUpAnimator
  *   - itemAnimator -> FadeInRightAnimator
  *   - layoutManager -> LinearLayoutManager.HORIZONTAL
  */
-fun RecyclerView.setup(isVertical: Boolean = true) {
+fun RecyclerView.list(isVertical: Boolean = true) {
     layoutManager =
         if (isVertical) {
-            itemAnimator = FadeInDownAnimator()
+            itemAnimator = FadeInUpAnimator()
             LinearLayoutManager(
                 context,
                 LinearLayoutManager.VERTICAL,

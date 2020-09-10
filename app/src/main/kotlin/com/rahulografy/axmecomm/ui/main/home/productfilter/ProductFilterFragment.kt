@@ -27,14 +27,11 @@ class ProductFilterFragment :
     ) {
         if (!listProductFilterCategoryItem.isNullOrEmpty()) {
             viewDataBinding.apply {
-                productFilterAdapter = ProductFilterAdapter(
-                    listProductFilterCategoryItem = ArrayList(listProductFilterCategoryItem),
-                    productFragmentViewModel = viewModel
-                )
+                productFilterAdapter = ProductFilterAdapter(productFragmentViewModel = viewModel)
                 executePendingBindings()
             }
 
-            // viewModel.listProductFilterCategoryItem.set(productFilterCategoryItemList)
+            viewModel.listProductFilterCategoryItem.set(listProductFilterCategoryItem)
         }
     }
 
