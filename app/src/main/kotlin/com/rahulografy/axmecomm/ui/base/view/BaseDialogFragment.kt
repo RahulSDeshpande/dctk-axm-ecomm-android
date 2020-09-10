@@ -1,5 +1,6 @@
 package com.rahulografy.axmecomm.ui.base.view
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +14,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.rahulografy.axmecomm.di.ActivityScoped
 import dagger.android.support.AndroidSupportInjection
-import dagger.android.support.DaggerFragment
+import dagger.android.support.DaggerAppCompatDialogFragment
 import javax.inject.Inject
 
 @ActivityScoped
-abstract class BaseFragment<VDB : ViewDataBinding, BVM : BaseViewModel> : DaggerFragment() {
+abstract class BaseDialogFragment<VDB : ViewDataBinding, BVM : BaseViewModel> :
+    DaggerAppCompatDialogFragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -37,6 +40,10 @@ abstract class BaseFragment<VDB : ViewDataBinding, BVM : BaseViewModel> : Dagger
 
     @get:IdRes
     protected open val toolbarId: Int = 0
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return BottomSheetDialog(requireContext(), theme)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -71,7 +78,7 @@ abstract class BaseFragment<VDB : ViewDataBinding, BVM : BaseViewModel> : Dagger
                 bindingVariable,
                 viewModel
             )
-            lifecycleOwner = this@BaseFragment
+            lifecycleOwner = this@BaseDialogFragment
             executePendingBindings()
         }
 

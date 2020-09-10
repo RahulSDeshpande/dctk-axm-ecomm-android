@@ -1,4 +1,4 @@
-package com.rahulografy.axmecomm.ui.main.home
+package com.rahulografy.axmecomm.ui.main.home.fragment.adapter
 
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle

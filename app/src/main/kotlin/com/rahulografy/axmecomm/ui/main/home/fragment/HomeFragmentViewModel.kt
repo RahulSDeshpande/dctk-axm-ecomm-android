@@ -2,18 +2,18 @@ package com.rahulografy.axmecomm.ui.main.home.fragment
 
 import androidx.databinding.ObservableBoolean
 import com.rahulografy.axmecomm.ui.base.view.BaseViewModel
-import com.rahulografy.axmecomm.ui.main.home.ProductsManager
+import com.rahulografy.axmecomm.ui.main.home.product.manager.ProductManager
 import javax.inject.Inject
 
 class HomeFragmentViewModel
 @Inject constructor(
-    val productsManager: ProductsManager
+    val productManager: ProductManager
 ) : BaseViewModel() {
 
-    val isApiCallInProgress = ObservableBoolean(false)
+    val isDataProcessing = ObservableBoolean(false)
 
     fun getProducts(forceApi: Boolean = false) {
-        isApiCallInProgress.set(true)
-        productsManager.getProducts(forceApi = forceApi)
+        isDataProcessing.set(true)
+        productManager.getProducts(forceApi = forceApi)
     }
 }

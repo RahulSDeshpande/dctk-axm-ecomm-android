@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.rahulografy.axmecomm.ui.main.home.product.ProductFragmentViewModel" />
+            type="com.rahulografy.axmecomm.ui.main.home.productfilter.ProductFilterFragmentViewModel" />
 
         <variable
             name="productAdapter"
@@ -20,7 +20,7 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvProducts"
+            android:id="@+id/rvProductFilter"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:clipToPadding="false"

@@ -1,4 +1,4 @@
-package com.rahulografy.axmecomm.ui.main.home.product
+package com.rahulografy.axmecomm.ui.main.home.productfilter
 
 import androidx.databinding.ObservableField
 import com.rahulografy.axmecomm.ui.base.view.BaseViewModel
@@ -8,7 +8,7 @@ import com.rahulografy.axmecomm.ui.main.home.product.model.Products
 import com.rahulografy.axmecomm.util.SingleLiveEvent
 import javax.inject.Inject
 
-class ProductFragmentViewModel
+class ProductFilterFragmentViewModel
 @Inject constructor(
     private val productManager: ProductManager
 ) : BaseViewModel() {
