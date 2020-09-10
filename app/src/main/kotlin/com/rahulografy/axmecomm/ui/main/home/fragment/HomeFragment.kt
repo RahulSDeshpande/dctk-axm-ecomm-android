@@ -95,6 +95,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
         if (productFilterFragment == null) {
             productFilterFragment = ProductFilterFragment()
         }
-        productFilterFragment?.show(childFragmentManager, productFilterFragment?.tag)
+
+        if (productFilterFragment?.isVisible != true) {
+            productFilterFragment?.show(childFragmentManager, productFilterFragment?.tag)
+        }
     }
 }
