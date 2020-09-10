@@ -35,11 +35,13 @@ class ProductFilterViewHolder(
     ) {
         binding.chipGroupProductFilter.apply {
             listProductFilterItem?.forEachIndexed { _, productFilterItem ->
-                val chipHashTag = Chip(context)
-                chipHashTag.id = productFilterItem.id
-                chipHashTag.text = productFilterItem.value
-                addView(chipHashTag)
+                val chipProductFilter = Chip(context)
+                chipProductFilter.id = productFilterItem.id
+                chipProductFilter.text = productFilterItem.value
+                addView(chipProductFilter)
             }
+
+            isSingleSelection = false
 
             setOnCheckedChangeListener { _, checkedId ->
                 if (checkedId >= 0) {

@@ -12,6 +12,7 @@
     <color name="colorPrimaryDark">#C85829</color>
     <color name="colorAccent">#BBBBBE</color>
 
+    <color name="colorPrimaryLighter">#FAA07B</color>
     <color name="colorAccentLight">#BBBBBE</color>
     <color name="colorAccentLighter">#E6E6E6</color>
 
@@ -31,6 +32,8 @@
     <color name="default_text_color_1">#797E7E</color>
     <color name="default_text_color_white">#FFFFFF</color>
 
-    <color name="colorChipBackground">@color/colorAccentLighter</color>
+    <color name="colorChipBackgroundUnselected">@color/colorAccentLighter</color>
+    <color name="colorChipBackgroundSelected">@color/colorPrimaryLighter</color>
+
     <color name="colorChipText">@color/default_text_color</color>
 </resources>
