@@ -5,7 +5,6 @@ import com.google.android.material.chip.Chip
 import com.rahulografy.axmecomm.databinding.ItemProductFilterType1Binding
 import com.rahulografy.axmecomm.ui.main.home.productfilter.listener.ProductFilterEventListener
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterCategoryItem
-import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterItem
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterType
 import com.rahulografy.axmecomm.util.ext.toast
 
@@ -17,8 +16,7 @@ class ProductFilterViewHolder(
         productFilterCategoryItem: ProductFilterCategoryItem,
         productFilterEventListener: ProductFilterEventListener?
     ) {
-        with(receiver = binding)
-        {
+        with(receiver = binding) {
             this.productFilterCategoryItem = productFilterCategoryItem
             this.productFilterEventListener = productFilterEventListener
             executePendingBindings()
@@ -26,29 +24,29 @@ class ProductFilterViewHolder(
 
         initProductFilterItemsChipGroup(
             binding = binding,
-            listProductFilterItem = productFilterCategoryItem.listProductFilterItem,
-            productFilterType = productFilterCategoryItem.productFilterType
+            productFilterCategoryItem = productFilterCategoryItem
         )
     }
 
     private fun initProductFilterItemsChipGroup(
         binding: ItemProductFilterType1Binding,
-        listProductFilterItem: List<ProductFilterItem>?,
-        productFilterType: ProductFilterType
+        productFilterCategoryItem: ProductFilterCategoryItem
     ) {
         binding.chipGroupProductFilter.apply {
-            listProductFilterItem?.forEachIndexed { _, productFilterItem ->
-                val chipProductFilter = Chip(context)
-                chipProductFilter.id = productFilterItem.id
-                chipProductFilter.text = productFilterItem.value
-                addView(chipProductFilter)
-            }
+            productFilterCategoryItem.apply {
+                listProductFilterItem.forEachIndexed { _, productFilterItem ->
+                    val chipProductFilter = Chip(context)
+                    chipProductFilter.id = productFilterItem.id
+                    chipProductFilter.text = productFilterItem.value
+                    addView(chipProductFilter)
+                }
 
-            isSingleSelection = productFilterType == ProductFilterType.SELECTION_SINGLE
+                isSingleSelection = productFilterType == ProductFilterType.SELECTION_SINGLE
 
-            setOnCheckedChangeListener { _, checkedId ->
-                if (checkedId >= 0) {
-                    context.toast(listProductFilterItem?.get(checkedId)?.value)
+                setOnCheckedChangeListener { _, checkedId ->
+                    if (checkedId >= 0) {
+                        context.toast(listProductFilterItem[checkedId].value)
+                    }
                 }
             }
         }

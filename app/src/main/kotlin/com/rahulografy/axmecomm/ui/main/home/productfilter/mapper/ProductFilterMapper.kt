@@ -15,7 +15,8 @@ class ProductFilterMapper
 
     // TODO | FIND MORE OPTIMUM SOLUTION
     private fun List<ProductItem>.mapProductFilterCategoryItem(): List<ProductFilterCategoryItem>? {
-        val brandList = map { it.brand.toString() }.distinct()
+        // NOT REQUIRED AS WE ALREADY HAVE 2 TABS SEPARATE FOR BRANDS
+        // val brandList = map { it.brand.toString() }.distinct()
         val phoneList = map { it.phone.toString() }.distinct()
 
         // TODO | PRICE SHOULD BE MAPPED IN INTEGER FORMAT FOR BETTER FILTERING
@@ -27,6 +28,7 @@ class ProductFilterMapper
 
         return arrayListOf<ProductFilterCategoryItem>().apply {
 
+            /* NOT REQUIRED AS WE ALREADY HAVE 2 TABS SEPARATE FOR BRANDS
             add(
                 ProductFilterCategoryItem(
                     value = "brand",
@@ -35,6 +37,7 @@ class ProductFilterMapper
                     productFilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
+            */
 
             add(
                 ProductFilterCategoryItem(
