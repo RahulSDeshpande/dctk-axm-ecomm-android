@@ -63,7 +63,7 @@ class ProductFilterManager
                         productFilterItem.isSelected == isSelected
                     },
                 isMandatory = productFilterCategoryItem.isMandatory,
-                productfilterType = productFilterCategoryItem.productfilterType
+                productFilterType = productFilterCategoryItem.productFilterType
             )
         }
 

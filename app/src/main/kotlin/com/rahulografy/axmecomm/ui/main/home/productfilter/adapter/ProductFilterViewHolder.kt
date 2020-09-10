@@ -6,6 +6,7 @@ import com.rahulografy.axmecomm.databinding.ItemProductFilterType1Binding
 import com.rahulografy.axmecomm.ui.main.home.productfilter.listener.ProductFilterEventListener
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterCategoryItem
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterItem
+import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterType
 import com.rahulografy.axmecomm.util.ext.toast
 
 class ProductFilterViewHolder(
@@ -25,13 +26,15 @@ class ProductFilterViewHolder(
 
         initProductFilterItemsChipGroup(
             binding = binding,
-            listProductFilterItem = productFilterCategoryItem.listProductFilterItem
+            listProductFilterItem = productFilterCategoryItem.listProductFilterItem,
+            productFilterType = productFilterCategoryItem.productFilterType
         )
     }
 
     private fun initProductFilterItemsChipGroup(
         binding: ItemProductFilterType1Binding,
-        listProductFilterItem: List<ProductFilterItem>?
+        listProductFilterItem: List<ProductFilterItem>?,
+        productFilterType: ProductFilterType
     ) {
         binding.chipGroupProductFilter.apply {
             listProductFilterItem?.forEachIndexed { _, productFilterItem ->
@@ -41,13 +44,11 @@ class ProductFilterViewHolder(
                 addView(chipProductFilter)
             }
 
-            isSingleSelection = false
+            isSingleSelection = productFilterType == ProductFilterType.SELECTION_SINGLE
 
             setOnCheckedChangeListener { _, checkedId ->
                 if (checkedId >= 0) {
-                    context.toast(
-                        listProductFilterItem?.get(checkedId)?.value
-                    )
+                    context.toast(listProductFilterItem?.get(checkedId)?.value)
                 }
             }
         }

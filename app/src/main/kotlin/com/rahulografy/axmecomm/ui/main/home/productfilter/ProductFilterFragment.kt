@@ -36,7 +36,6 @@ class ProductFilterFragment :
     }
 
     override fun initSharedViewModelObservers() {
-
         viewModel
             .saveProductFilterEvent
             .observe(

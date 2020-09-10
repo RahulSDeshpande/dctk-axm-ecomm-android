@@ -5,5 +5,5 @@ data class ProductFilterCategoryItem(
     val title: String? = null,
     val listProductFilterItem: List<ProductFilterItem> = listOf(),
     val isMandatory: Boolean = false,
-    val productfilterType: ProductFilterType
+    val productFilterType: ProductFilterType
 )

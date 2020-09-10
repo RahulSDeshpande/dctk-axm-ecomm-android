@@ -11,8 +11,7 @@
     <style name="ProductFilterChipGroupStyle" parent="Widget.MaterialComponents.ChipGroup">
         <item name="chipSpacingHorizontal">@dimen/space_small</item>
         <item name="chipSpacingVertical">@dimen/space_tiny</item>
-        <item name="singleLine">true</item>
-        <item name="singleSelection">true</item>
+        <item name="singleLine">false</item>
     </style>
 
     <style name="BaseChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
