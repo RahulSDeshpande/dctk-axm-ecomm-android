@@ -10,57 +10,63 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayoutHome"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="8dp"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarHome"
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayoutHome"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:background="@color/colorPrimary"
-                android:elevation="0dp"
-                app:title="@string/title_home"
-                app:titleTextColor="@color/default_text_color_white" />
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayoutHome"
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbarHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:background="@color/colorPrimary"
+                    android:elevation="0dp"
+                    app:title="@string/title_home"
+                    app:titleTextColor="@color/default_text_color_white" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayoutHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="?actionBarSize"
+                    android:animateLayoutChanges="true"
+                    android:background="@color/colorPrimary"
+                    android:elevation="0dp"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                    app:tabIndicatorColor="@color/colorAccent"
+                    app:tabIndicatorHeight="4dp"
+                    app:tabMode="auto"
+                    app:tabTextColor="@color/default_text_color_white" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <com.rahulografy.axmecomm.util.view.SwipeRefreshLayout2
+                android:id="@+id/srlHome"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:animateLayoutChanges="true"
-                android:background="@color/colorPrimary"
-                android:elevation="0dp"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar"
-                app:tabIndicatorColor="@color/colorAccent"
-                app:tabIndicatorHeight="4dp"
-                app:tabMode="auto"
-                app:tabTextColor="@color/default_text_color_white" />
+                android:layout_height="0dp"
+                app:isRefreshing="@{viewModel.isDataProcessing}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appBarLayoutHome"
+                app:onRefreshListener="@{() -> viewModel.getProducts(true)}">
 
-        </com.google.android.material.appbar.AppBarLayout>
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager2Home"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
-        <com.rahulografy.axmecomm.util.view.SwipeRefreshLayout2
-            android:id="@+id/srlHome"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:isRefreshing="@{viewModel.isDataProcessing}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBarLayoutHome"
-            app:onRefreshListener="@{() -> viewModel.getProducts(true)}">
+            </com.rahulografy.axmecomm.util.view.SwipeRefreshLayout2>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2Home"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.rahulografy.axmecomm.util.view.SwipeRefreshLayout2>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
