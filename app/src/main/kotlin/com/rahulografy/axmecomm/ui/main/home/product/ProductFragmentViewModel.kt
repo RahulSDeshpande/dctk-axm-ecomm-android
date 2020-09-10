@@ -18,7 +18,7 @@ class ProductFragmentViewModel
     val productClickEvent = SingleLiveEvent<ProductItem>()
 
     fun getProductsFiltered(brand: String?) =
-        productManager.getProductsFiltered(brand = brand)
+        productManager.getProductsByCategory(category = brand)
 
     fun openProductDetails(productItem: ProductItem) {
         productClickEvent.value = productItem

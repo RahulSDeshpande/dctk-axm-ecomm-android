@@ -21,7 +21,9 @@ class ProductAdapter(
         ProductViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.item_product_type_1, parent, false
+                R.layout.item_product_type_1,
+                parent,
+                false
             )
         )
 

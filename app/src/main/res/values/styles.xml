@@ -5,6 +5,31 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/sans_regular</item>
+        <item name="chipStyle">@style/ChipChoiceStyle</item>
+    </style>
+
+    <style name="ProductFilterChipGroupStyle" parent="Widget.MaterialComponents.ChipGroup">
+        <item name="chipSpacingHorizontal">@dimen/space_small</item>
+        <item name="chipSpacingVertical">@dimen/space_tiny</item>
+        <item name="singleLine">true</item>
+        <item name="singleSelection">true</item>
+    </style>
+
+    <style name="BaseChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/colorChipBackground</item>
+        <item name="android:textColor">@color/colorChipText</item>
+        <item name="android:textAppearance">@style/BaseChipTextStyle</item>
+        <item name="chipEndPadding">@dimen/space_small</item>
+        <item name="chipStartPadding">@dimen/space_small</item>
+        <!--<item name="chipMinHeight">40dp</item>-->
+    </style>
+
+    <style name="ChipChoiceStyle" parent="BaseChipStyle" />
+
+    <style name="BaseChipTextStyle" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/sans_regular</item>
+        <item name="android:fontFamily">@font/sans_regular</item>
+        <!--<item name="android:textSize">@dimen/text_size_7</item>-->
     </style>
 
 </resources>

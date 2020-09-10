@@ -4,6 +4,7 @@ import com.rahulografy.axmecomm.ui.base.mapper.BaseMapper
 import com.rahulografy.axmecomm.ui.main.home.product.model.ProductItem
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterCategoryItem
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterItem
+import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterType
 import javax.inject.Inject
 
 class ProductFilterMapper
@@ -30,7 +31,8 @@ class ProductFilterMapper
                 ProductFilterCategoryItem(
                     value = "brand",
                     title = "Brand",
-                    listProductFilterItem = brandList.mapProductFilterItem()
+                    listProductFilterItem = brandList.mapProductFilterItem(),
+                    productfilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
@@ -38,7 +40,8 @@ class ProductFilterMapper
                 ProductFilterCategoryItem(
                     value = "phone",
                     title = "Phone Name",
-                    listProductFilterItem = phoneList.mapProductFilterItem()
+                    listProductFilterItem = phoneList.mapProductFilterItem(),
+                    productfilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
@@ -46,7 +49,8 @@ class ProductFilterMapper
                 ProductFilterCategoryItem(
                     value = "price",
                     title = "Price",
-                    listProductFilterItem = priceList.mapProductFilterItem()
+                    listProductFilterItem = priceList.mapProductFilterItem(),
+                    productfilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
@@ -54,7 +58,8 @@ class ProductFilterMapper
                 ProductFilterCategoryItem(
                     value = "sim",
                     title = "SIM",
-                    listProductFilterItem = simList.mapProductFilterItem()
+                    listProductFilterItem = simList.mapProductFilterItem(),
+                    productfilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
@@ -62,7 +67,8 @@ class ProductFilterMapper
                 ProductFilterCategoryItem(
                     value = "gpa",
                     title = "GPA",
-                    listProductFilterItem = gpsList.mapProductFilterItem()
+                    listProductFilterItem = gpsList.mapProductFilterItem(),
+                    productfilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
@@ -70,7 +76,8 @@ class ProductFilterMapper
                 ProductFilterCategoryItem(
                     value = "audioJack",
                     title = "Audio Jack",
-                    listProductFilterItem = audioJackList.mapProductFilterItem()
+                    listProductFilterItem = audioJackList.mapProductFilterItem(),
+                    productfilterType = ProductFilterType.SELECTION_SINGLE
                 )
             )
         }

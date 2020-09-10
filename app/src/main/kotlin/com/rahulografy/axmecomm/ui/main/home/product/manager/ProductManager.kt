@@ -53,6 +53,6 @@ class ProductManager
         productFilterManager.init(products.value?.products)
     }
 
-    fun getProductsFiltered(brand: String?) =
-        mapCategoryWiseProductItems.value?.get(brand)
+    fun getProductsByCategory(category: String?) =
+        mapCategoryWiseProductItems.value?.get(category)
 }
