@@ -29,7 +29,7 @@
             android:paddingEnd="@dimen/space_normal"
             android:paddingBottom="@dimen/space_small"
             android:text="@{productFilterCategoryItem.title}"
-            android:textColor="@color/default_text_color"
+            android:textColor="@color/default_text_color_1"
             android:textSize="@dimen/text_medium"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Price Filter" />
