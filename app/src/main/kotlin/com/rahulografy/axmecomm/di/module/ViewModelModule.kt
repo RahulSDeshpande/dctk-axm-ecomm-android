@@ -7,6 +7,7 @@ import com.rahulografy.axmecomm.di.ViewModelKey
 import com.rahulografy.axmecomm.ui.main.home.activity.HomeActivityViewModel
 import com.rahulografy.axmecomm.ui.main.home.fragment.HomeFragmentViewModel
 import com.rahulografy.axmecomm.ui.main.home.product.ProductFragmentViewModel
+import com.rahulografy.axmecomm.ui.main.home.productfilter.ProductFilterFragmentViewModel
 import com.rahulografy.axmecomm.util.ViewModelFactory
 import dagger.Binds
 import dagger.Module
@@ -38,4 +39,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProductFragmentViewModel::class)
     abstract fun bindProductFragmentViewModel(viewModel: ProductFragmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProductFilterFragmentViewModel::class)
+    abstract fun bindProductFilterFragmentViewModel(viewModel: ProductFilterFragmentViewModel): ViewModel
 }
