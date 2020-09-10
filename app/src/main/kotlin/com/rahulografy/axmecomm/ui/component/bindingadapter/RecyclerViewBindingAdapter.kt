@@ -10,6 +10,7 @@ import com.rahulografy.axmecomm.ui.main.home.product.model.ProductItem
 import com.rahulografy.axmecomm.ui.main.home.productfilter.adapter.ProductFilterAdapter
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterCategoryItem
 import com.rahulografy.axmecomm.util.ext.gridStaggered
+import com.rahulografy.axmecomm.util.ext.list
 
 @BindingAdapter("app:isVerticalItemDecoration")
 fun RecyclerView.isVerticalItemDecoration(isVertical: Boolean) {
@@ -28,6 +29,16 @@ fun RecyclerView?.setAdapter(
     this?.apply {
         gridStaggered()
         adapter = productAdapter
+    }
+}
+
+@BindingAdapter("app:adapter")
+fun RecyclerView?.setAdapter(
+    productFilterAdapter: ProductFilterAdapter?
+) {
+    this?.apply {
+        list()
+        adapter = productFilterAdapter
     }
 }
 

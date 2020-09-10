@@ -65,8 +65,8 @@ class ProductFilterMapper
 
             add(
                 ProductFilterCategoryItem(
-                    value = "gpa",
-                    title = "GPA",
+                    value = "gps",
+                    title = "GPS",
                     listProductFilterItem = gpsList.mapProductFilterItem(),
                     productfilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
