@@ -30,14 +30,26 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Price Filter" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroupProductFilter"
-            style="@style/ProductFilterChipGroupStyle"
+        <HorizontalScrollView
+            android:id="@+id/hsvProductFilter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
-            android:padding="@dimen/space_normal"
-            app:layout_constraintTop_toBottomOf="@+id/tvProductFilterTitle" />
+            android:clipToPadding="false"
+            android:paddingStart="@dimen/space_normal"
+            android:paddingEnd="@dimen/space_normal"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@+id/tvProductFilterTitle">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupProductFilter"
+                style="@style/ProductFilterChipGroupStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                app:layout_constraintTop_toBottomOf="@+id/tvProductFilterTitle" />
+
+        </HorizontalScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

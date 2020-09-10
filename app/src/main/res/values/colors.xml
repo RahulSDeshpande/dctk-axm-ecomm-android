@@ -13,7 +13,7 @@
     <color name="colorAccent">#BBBBBE</color>
 
     <color name="colorAccentLight">#BBBBBE</color>
-    <color name="colorAccentLighter">#BBBBBE</color>
+    <color name="colorAccentLighter">#E6E6E6</color>
 
     <color name="colorWhite">#FFFFFF</color>
 
@@ -31,6 +31,6 @@
     <color name="default_text_color_1">#797E7E</color>
     <color name="default_text_color_white">#FFFFFF</color>
 
-    <color name="colorChipBackground">@color/colorAccentLight</color>
+    <color name="colorChipBackground">@color/colorAccentLighter</color>
     <color name="colorChipText">@color/default_text_color</color>
 </resources>
