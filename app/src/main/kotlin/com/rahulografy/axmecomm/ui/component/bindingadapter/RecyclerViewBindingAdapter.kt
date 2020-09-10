@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.RecyclerView
 import com.rahulografy.axmecomm.ui.main.home.product.adapter.ProductAdapter
 import com.rahulografy.axmecomm.ui.main.home.product.model.ProductItem
+import com.rahulografy.axmecomm.ui.main.home.productfilter.adapter.ProductFilterAdapter
+import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterCategoryItem
 import com.rahulografy.axmecomm.util.ext.gridStaggered
 
 @BindingAdapter("app:isVerticalItemDecoration")
@@ -38,7 +40,6 @@ fun RecyclerView?.setProducts(
     }
 }
 
-/*
 @BindingAdapter("app:items")
 fun RecyclerView?.setProductFilters(
     items: List<ProductFilterCategoryItem>?
@@ -47,4 +48,3 @@ fun RecyclerView?.setProductFilters(
         this?.setData(items)
     }
 }
-*/

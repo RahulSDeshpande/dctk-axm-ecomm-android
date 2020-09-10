@@ -10,7 +10,7 @@ class ProductViewHolder(private val binding: ItemProductType1Binding) :
 
     fun bind(
         productItem: ProductItem,
-        productEventListener: ProductEventListener
+        productEventListener: ProductEventListener?
     ) {
         with(receiver = binding)
         {

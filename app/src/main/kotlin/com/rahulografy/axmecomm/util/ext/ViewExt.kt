@@ -110,7 +110,7 @@ fun RecyclerView.gridStaggered(isVertical: Boolean = true, spanCount: Int = 2) {
 /**
  * Show [Toast] message
  */
-fun Context.toast(text: String, duration: Int = Toast.LENGTH_LONG) {
+fun Context.toast(text: String?, duration: Int = Toast.LENGTH_LONG) {
     Toast.makeText(this, text, duration).show()
 }
 
