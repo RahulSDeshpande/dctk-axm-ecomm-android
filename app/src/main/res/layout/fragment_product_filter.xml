@@ -10,8 +10,8 @@
             type="com.rahulografy.axmecomm.ui.main.home.productfilter.ProductFilterFragmentViewModel" />
 
         <variable
-            name="productAdapter"
-            type="com.rahulografy.axmecomm.ui.main.home.product.adapter.ProductAdapter" />
+            name="productFilterAdapter"
+            type="com.rahulografy.axmecomm.ui.main.home.productfilter.adapter.ProductFilterAdapter" />
 
     </data>
 
@@ -19,20 +19,69 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvProductFilter"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvProductFilterTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sans_bold"
+            android:padding="@dimen/space_normal"
+            android:text="@string/filter_products"
+            android:textColor="@color/default_text_color"
+            android:textSize="@dimen/text_xlarge"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:padding="@dimen/space_tiny"
-            app:adapter="@{productAdapter}"
-            app:items="@{viewModel.products.products}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="5"
-            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/item_product_type_1"
-            tools:spanCount="2" />
+            app:layout_constraintTop_toBottomOf="@+id/tvProductFilterTitle">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvProductFilter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    app:adapter="@{productFilterAdapter}"
+                    app:items="@{viewModel.listProductFilterCategoryItem}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_product_filter_type_1" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonProductFilterCancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_normal"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:onClick="@{() -> viewModel.saveProductFilter(false)}"
+                    android:text="@string/cancel"
+                    android:textColor="@color/default_text_color_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonProductFilterSave"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvProductFilter" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonProductFilterSave"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_normal"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:onClick="@{() -> viewModel.saveProductFilter(true)}"
+                    android:text="@string/filter"
+                    android:textColor="@color/default_text_color_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/buttonProductFilterCancel"
+                    app:layout_constraintTop_toBottomOf="@+id/rvProductFilter" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

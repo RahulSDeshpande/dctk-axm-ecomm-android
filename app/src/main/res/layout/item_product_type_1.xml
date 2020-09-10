@@ -5,8 +5,6 @@
 
     <data>
 
-        <import type="android.view.View" />
-
         <variable
             name="productItem"
             type="com.rahulografy.axmecomm.ui.main.home.product.model.ProductItem" />
