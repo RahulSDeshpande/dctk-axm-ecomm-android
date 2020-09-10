@@ -1,0 +1,26 @@
+package com.rahulografy.axmecomm.ui.main.home.productfilter
+
+import androidx.databinding.ObservableField
+import com.rahulografy.axmecomm.ui.base.view.BaseViewModel
+import com.rahulografy.axmecomm.ui.main.home.product.manager.ProductManager
+import com.rahulografy.axmecomm.ui.main.home.product.model.ProductItem
+import com.rahulografy.axmecomm.ui.main.home.product.model.Products
+import com.rahulografy.axmecomm.util.SingleLiveEvent
+import javax.inject.Inject
+
+class ProductFilterFragmentViewModel
+@Inject constructor(
+    private val productManager: ProductManager
+) : BaseViewModel() {
+
+    val products = ObservableField<Products>()
+
+    val productClickEvent = SingleLiveEvent<ProductItem>()
+
+    fun getProductsFiltered(brand: String?) =
+        productManager.getProductsFiltered(brand = brand)
+
+    fun openProductDetails(productItem: ProductItem) {
+        productClickEvent.value = productItem
+    }
+}

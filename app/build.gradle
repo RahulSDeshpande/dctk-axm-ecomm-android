@@ -94,4 +94,6 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
     implementation "cn.wzbos.android.widget:filterview:1.0.0"
+
+    implementation "com.arthurivanets.bottomsheet:bottomsheets-core:1.0.0"
 }

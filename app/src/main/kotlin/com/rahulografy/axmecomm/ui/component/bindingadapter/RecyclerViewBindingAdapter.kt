@@ -37,3 +37,14 @@ fun RecyclerView?.setProducts(
         this?.setData(items)
     }
 }
+
+/*
+@BindingAdapter("app:items")
+fun RecyclerView?.setProductFilters(
+    items: List<ProductFilterCategoryItem>?
+) {
+    with(this?.adapter as ProductFilterAdapter?) {
+        this?.setData(items)
+    }
+}
+*/
