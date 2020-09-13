@@ -39,10 +39,23 @@ class ProductFilterViewHolder(
 
                 productFilterItemList.forEachIndexed { _, productFilterItem ->
 
+                    (productFilterType == ProductFilterType.SELECTION_SINGLE).let {
+                        isSingleSelection = it
+                        isSelectionRequired = it
+                    }
+
                     Chip(context).apply {
 
                         id = productFilterItem.id
                         text = productFilterItem.value
+
+                        if (productFilterType == ProductFilterType.SELECTION_SINGLE) {
+                            if (productFilterItem.isSelected) {
+                                isChecked = true
+                            }
+                        } else {
+                            isChecked = productFilterItem.isSelected
+                        }
 
                         setOnCheckedChangeListener { _, isChecked ->
 
@@ -60,11 +73,7 @@ class ProductFilterViewHolder(
                     }
                 }
 
-                (productFilterType == ProductFilterType.SELECTION_SINGLE).let {
-                    isSingleSelection = it
-                    isSelectionRequired = it
-                }
-
+                // TODO | IS THIS REQUIRED FOR SINGLE SELECTION CHIPS?
 //                setOnCheckedChangeListener { _, checkedId ->
 //                    if (checkedId >= 0) {
 //                        productFilterCategoryItem.productFilterItemList[adapterPosition].isSelected=checkedId

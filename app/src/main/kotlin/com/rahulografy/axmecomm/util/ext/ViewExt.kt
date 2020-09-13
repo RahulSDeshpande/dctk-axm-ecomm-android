@@ -1,6 +1,7 @@
 package com.rahulografy.axmecomm.util.ext
 
 import android.content.Context
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
@@ -151,3 +152,12 @@ fun ImageView.glide(
         .with(context)
         .load(url)
         .into(this)
+
+fun View.show(show: Boolean) {
+    visibility =
+        if (show) {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
+}

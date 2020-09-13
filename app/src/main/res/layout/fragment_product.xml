@@ -34,6 +34,12 @@
             tools:listitem="@layout/item_product_type_1"
             tools:spanCount="2" />
 
+        <include
+            android:id="@+id/layoutNoData"
+            layout="@layout/layout_no_data"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -9,7 +9,9 @@ import com.rahulografy.axmecomm.ui.base.view.BaseFragment
 import com.rahulografy.axmecomm.ui.main.home.product.adapter.ProductAdapter
 import com.rahulografy.axmecomm.ui.main.home.product.model.ProductItem
 import com.rahulografy.axmecomm.ui.main.home.product.model.Products
+import com.rahulografy.axmecomm.util.ext.show
 import com.rahulografy.axmecomm.util.ext.toast
+import kotlinx.android.synthetic.main.fragment_product.*
 
 class ProductFragment : BaseFragment<FragmentProductBinding, ProductFragmentViewModel>() {
 
@@ -46,6 +48,10 @@ class ProductFragment : BaseFragment<FragmentProductBinding, ProductFragmentView
             }
 
             viewModel.products.set(Products(productItemList))
+
+            showProductList(show = true)
+        } else {
+            showProductList(show = false)
         }
     }
 
@@ -61,5 +67,10 @@ class ProductFragment : BaseFragment<FragmentProductBinding, ProductFragmentView
                     }
                 )
         }
+    }
+
+    private fun showProductList(show: Boolean) {
+        rvProducts.show(show = show)
+        layoutNoData.show(show = show.not())
     }
 }

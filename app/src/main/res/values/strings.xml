@@ -10,4 +10,5 @@
     <string name="reset">Reset</string>
     <string name="msg_fetching_data_please_wait">Data is being fetched, please wait…</string>
     <string name="msg_no_internet">Your device is offline.\nPlease connect to the internet.</string>
+    <string name="msg_no_data">No product found.</string>
 </resources>
