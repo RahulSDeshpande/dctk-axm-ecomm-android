@@ -1,5 +1,6 @@
 package com.rahulografy.axmecomm.ui.main.home.productfilter
 
+import android.content.DialogInterface
 import androidx.lifecycle.Observer
 import com.rahulografy.axmecomm.BR
 import com.rahulografy.axmecomm.R
@@ -7,7 +8,6 @@ import com.rahulografy.axmecomm.databinding.FragmentProductFilterBinding
 import com.rahulografy.axmecomm.ui.base.view.BaseDialogFragment
 import com.rahulografy.axmecomm.ui.main.home.productfilter.adapter.ProductFilterAdapter
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterCategoryItem
-import com.rahulografy.axmecomm.util.ext.toast
 
 class ProductFilterFragment :
     BaseDialogFragment<FragmentProductFilterBinding, ProductFilterFragmentViewModel>() {
@@ -23,28 +23,48 @@ class ProductFilterFragment :
     }
 
     private fun initProductFilterCategoryList(
-        listProductFilterCategoryItem: List<ProductFilterCategoryItem>?
+        productFilterCategoryItemList: List<ProductFilterCategoryItem>?
     ) {
-        if (!listProductFilterCategoryItem.isNullOrEmpty()) {
+        if (!productFilterCategoryItemList.isNullOrEmpty()) {
             viewDataBinding.apply {
                 productFilterAdapter = ProductFilterAdapter(productFragmentViewModel = viewModel)
                 executePendingBindings()
             }
 
-            viewModel.listProductFilterCategoryItem.set(listProductFilterCategoryItem)
+            viewModel.productFilterCategoryItemList.set(productFilterCategoryItemList)
         }
     }
 
     override fun initSharedViewModelObservers() {
-        viewModel
-            .saveProductFilterEvent
-            .observe(
-                lifecycleOwner = this,
-                observer = Observer { productItem ->
-                    productItem?.let { status ->
-                        toast(text = "FilterFragmentEvent status: $status")
-                    }
-                }
-            )
+        viewModel.apply {
+
+            productFilterSaveEvent
+                .observe(
+                    lifecycleOwner = this@ProductFilterFragment,
+                    observer = Observer { dismissDialog() }
+                )
+
+            productFilterCancelEvent
+                .observe(
+                    lifecycleOwner = this@ProductFilterFragment,
+                    observer = Observer { dismissDialog() }
+                )
+
+
+            productFilterResetEvent
+                .observe(
+                    lifecycleOwner = this@ProductFilterFragment,
+                    observer = Observer { dismissDialog() }
+                )
+        }
+    }
+
+    private fun dismissDialog() {
+        dismissAllowingStateLoss()
+    }
+
+    override fun onCancel(dialog: DialogInterface) {
+        super.onCancel(dialog)
+        viewModel.cancelProductFilter()
     }
 }

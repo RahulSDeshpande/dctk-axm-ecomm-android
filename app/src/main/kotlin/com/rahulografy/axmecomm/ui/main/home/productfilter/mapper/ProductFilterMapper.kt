@@ -5,16 +5,18 @@ import com.rahulografy.axmecomm.ui.main.home.product.model.ProductItem
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterCategoryItem
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterItem
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterType
+import com.rahulografy.axmecomm.util.ext.addIfNotExists
+import com.rahulografy.axmecomm.util.ext.toList
 import javax.inject.Inject
 
 class ProductFilterMapper
 @Inject constructor() : BaseMapper<List<ProductItem>, List<ProductFilterCategoryItem>> {
 
-    override fun map(input: List<ProductItem>?): List<ProductFilterCategoryItem>? =
+    override fun map(input: List<ProductItem>?): ArrayList<ProductFilterCategoryItem>? =
         input?.mapProductFilterCategoryItem()
 
     // TODO | FIND MORE OPTIMUM SOLUTION
-    private fun List<ProductItem>.mapProductFilterCategoryItem(): List<ProductFilterCategoryItem>? {
+    private fun List<ProductItem>.mapProductFilterCategoryItem(): ArrayList<ProductFilterCategoryItem>? {
         // NOT REQUIRED AS WE ALREADY HAVE 2 TABS SEPARATE FOR BRANDS
         // val brandList = map { it.brand.toString() }.distinct()
         val phoneList = map { it.phone.toString() }.distinct()
@@ -28,12 +30,14 @@ class ProductFilterMapper
 
         return arrayListOf<ProductFilterCategoryItem>().apply {
 
+            var id = -1
+
             /* NOT REQUIRED AS WE ALREADY HAVE 2 TABS SEPARATE FOR BRANDS
             add(
                 ProductFilterCategoryItem(
                     value = "brand",
                     title = "Brand",
-                    listProductFilterItem = brandList.mapProductFilterItem(),
+                    productFilterItemList = brandList.mapProductFilterItem(),
                     productFilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
@@ -41,45 +45,50 @@ class ProductFilterMapper
 
             add(
                 ProductFilterCategoryItem(
+                    id = ++id,
                     value = "phone",
                     title = "Phone Name",
-                    listProductFilterItem = phoneList.mapProductFilterItem(),
+                    productFilterItemList = phoneList.mapProductFilterItem(),
                     productFilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
             add(
                 ProductFilterCategoryItem(
+                    id = ++id,
                     value = "price",
                     title = "Price",
-                    listProductFilterItem = priceList.mapProductFilterItem(),
+                    productFilterItemList = priceList.mapProductFilterItem(),
                     productFilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
             add(
                 ProductFilterCategoryItem(
+                    id = ++id,
                     value = "sim",
                     title = "SIM",
-                    listProductFilterItem = simList.mapProductFilterItem(),
+                    productFilterItemList = simList.mapProductFilterItem(),
                     productFilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
             add(
                 ProductFilterCategoryItem(
+                    id = ++id,
                     value = "gps",
                     title = "GPS",
-                    listProductFilterItem = gpsList.mapProductFilterItem(),
+                    productFilterItemList = gpsList.mapProductFilterItem(),
                     productFilterType = ProductFilterType.SELECTION_MULTIPLE
                 )
             )
 
             add(
                 ProductFilterCategoryItem(
+                    id = ++id,
                     value = "audioJack",
                     title = "Audio Jack",
-                    listProductFilterItem = audioJackList.mapProductFilterItem(),
+                    productFilterItemList = audioJackList.mapProductFilterItem(),
                     productFilterType = ProductFilterType.SELECTION_SINGLE
                 )
             )
@@ -88,14 +97,90 @@ class ProductFilterMapper
 
     private fun List<String>.mapProductFilterItem(): List<ProductFilterItem> {
 
-        val listProductFilterItem = arrayListOf<ProductFilterItem>()
+        val productFilterItemList = arrayListOf<ProductFilterItem>()
 
         forEachIndexed { index, value ->
-            listProductFilterItem.add(
+            productFilterItemList.add(
                 ProductFilterItem(id = index, value = value)
             )
         }
 
-        return listProductFilterItem
+        return productFilterItemList
+    }
+
+    fun saveProductFilterCategoryItemListTempToFinal(
+        productFilterCategoryItemListTemp: ArrayList<ProductFilterCategoryItem>,
+        productFilterCategoryItemListFinal: List<ProductFilterCategoryItem>?,
+        productFilterCategoryWiseProductFilterValueMapFinal: HashMap<String, ArrayList<String>>
+    ) {
+        productFilterCategoryWiseProductFilterValueMapFinal.clear()
+
+        val productFilterCategoryValueListTemp =
+            productFilterCategoryItemListTemp
+                .groupBy { it.value }
+                .keys
+                .toList()
+
+        productFilterCategoryItemListFinal
+            ?.filter { productFilterCategoryValueListTemp.contains(it.value) }
+            ?.forEach { productFilterCategoryItemFinal ->
+
+                val productFilterCategoryItemTemp = productFilterCategoryItemListTemp
+                    .find { it.value == productFilterCategoryItemFinal.value }
+
+                if (productFilterCategoryItemTemp != null) {
+
+                    val productFilterItemListTemp =
+                        productFilterCategoryItemTemp.productFilterItemList
+
+                    val productFilterValueListTemp =
+                        productFilterItemListTemp
+                            .groupBy { it.value }
+                            .keys
+                            .toList()
+
+                    productFilterCategoryItemFinal
+                        .productFilterItemList
+                        .filter { productFilterValueListTemp.contains(it.value) }
+                        .forEachIndexed { index, productFilterItem ->
+                            val isSelectedTemp = productFilterItemListTemp[index].isSelected
+                            productFilterItem.isSelected = isSelectedTemp
+
+                            if (isSelectedTemp) {
+                                updateProductFilterCategoryWiseProductFilterValueMap(
+                                    categoryValue = productFilterCategoryItemTemp.value,
+                                    filterValue = productFilterItem.value,
+                                    productFilterCategoryWiseProductFilterValueMapFinal =
+                                    productFilterCategoryWiseProductFilterValueMapFinal
+                                )
+                            }
+                        }
+                }
+            }
+    }
+
+    private fun updateProductFilterCategoryWiseProductFilterValueMap(
+        categoryValue: String,
+        filterValue: String,
+        productFilterCategoryWiseProductFilterValueMapFinal: HashMap<String, ArrayList<String>>
+    ) {
+        var list = productFilterCategoryWiseProductFilterValueMapFinal[categoryValue]
+        if (list == null) {
+            list = arrayListOf()
+        }
+        list.addIfNotExists(filterValue)
+        productFilterCategoryWiseProductFilterValueMapFinal[categoryValue] = list
+
+//        productFilterCategoryWiseProductFilterValueMapFinal[categoryValue]
+//            .toArrayList()
+//            .addIfNotExists(filterValue)
+    }
+
+    fun resetProductFilterCategoryItemList(productFilterCategoryItemList: List<ProductFilterCategoryItem>) {
+        productFilterCategoryItemList.forEach { productFilterCategoryItem ->
+            productFilterCategoryItem.productFilterItemList.forEach { productFilterItem ->
+                productFilterItem.isSelected = false
+            }
+        }
     }
 }

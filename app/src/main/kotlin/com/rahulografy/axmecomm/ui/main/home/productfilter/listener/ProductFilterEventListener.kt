@@ -1,14 +1,21 @@
 package com.rahulografy.axmecomm.ui.main.home.productfilter.listener
 
-import com.rahulografy.axmecomm.ui.base.model.BaseProductItem
+import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterCategoryItem
 
 interface ProductFilterEventListener {
 
-    fun onFilterCancelled()
+    fun onProductFilterItemSelected(
+        productFilterCategoryItem: ProductFilterCategoryItem,
+        productCategoryItemId: Int,
+        productCategoryItemValue: String,
+        productItemId: Int,
+        productItemValue: String,
+        isSelected: Boolean
+    )
 
-    fun onFilterSaved()
+    fun onProductFilterSaved()
 
-    fun onFilterItemSelected(item: BaseProductItem) {}
+    fun onProductFilterCancelled()
 
-    fun onFilterItemDeselected(item: BaseProductItem) {}
+    fun onProductFilterReset()
 }
