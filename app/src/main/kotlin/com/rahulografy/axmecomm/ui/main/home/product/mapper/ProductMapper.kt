@@ -30,6 +30,6 @@ class ProductMapper
             sim = sim
         )
 
-    fun groupByCategory(listProductsItem: List<ProductItem>?) =
-        listProductsItem?.groupBy { it.brand.toString() }
+    fun groupByCategory(productItemList: List<ProductItem>?) =
+        productItemList?.groupBy { it.brand.toString() }
 }

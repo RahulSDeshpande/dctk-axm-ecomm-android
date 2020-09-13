@@ -13,7 +13,7 @@ import com.rahulografy.axmecomm.ui.main.home.product.model.toProductItem
 
 // TODO | WIP | CREATE A BaseAdapter WHICH SHOULD HAVE ALL COMMON ADAPTER FEATURES
 class ProductAdapter(
-    private var listProductItem: ArrayList<ProductItem> = arrayListOf(),
+    private var productItemList: ArrayList<ProductItem> = arrayListOf(),
     private val productFragmentViewModel: ProductFragmentViewModel?
 ) : BaseListAdapter<ProductItem, ProductViewHolder>(ProductsDiffUtilItemCallback()) {
 
@@ -27,11 +27,11 @@ class ProductAdapter(
             )
         )
 
-    override fun getItemCount() = listProductItem.size
+    override fun getItemCount() = productItemList.size
 
     override fun onBindViewHolder(viewHolder: ProductViewHolder, position: Int) =
         viewHolder.bind(
-            productItem = listProductItem[position],
+            productItem = productItemList[position],
             productEventListener = object : ProductEventListener {
 
                 override fun onItemClicked(item: BaseProductItem) {
@@ -41,15 +41,15 @@ class ProductAdapter(
         )
 
     override fun setData(data: List<ProductItem>?) {
-        listProductItem.clear()
-        data?.let { listProductItem.addAll(it) }
-        submitList(listProductItem)
+        productItemList.clear()
+        data?.let { productItemList.addAll(it) }
+        submitList(productItemList)
     }
 
     override fun addData(data: List<ProductItem>?) {
         data?.let {
-            listProductItem.addAll(it)
-            submitList(listProductItem)
+            productItemList.addAll(it)
+            submitList(productItemList)
         }
     }
 }
