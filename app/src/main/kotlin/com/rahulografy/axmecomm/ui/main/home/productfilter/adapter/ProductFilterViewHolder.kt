@@ -66,6 +66,7 @@ class ProductFilterViewHolder(
                     isSelectionRequired = it
                 }
 
+                // TODO | IS THIS REQUIRED FOR SINGLE SELECTION CHIPS?
 //                setOnCheckedChangeListener { _, checkedId ->
 //                    if (checkedId >= 0) {
 //                        productFilterCategoryItem.productFilterItemList[adapterPosition].isSelected=checkedId

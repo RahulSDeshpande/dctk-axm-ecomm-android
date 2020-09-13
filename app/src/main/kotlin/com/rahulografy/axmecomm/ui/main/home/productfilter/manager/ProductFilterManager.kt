@@ -7,7 +7,6 @@ import com.rahulografy.axmecomm.ui.main.home.productfilter.mapper.ProductFilterM
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterCategoryItem
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterItem
 import com.rahulografy.axmecomm.util.SingleLiveEvent
-import com.rahulografy.axmecomm.util.ext.toArrayList
 import javax.inject.Inject
 
 @ApplicationScoped
@@ -120,23 +119,10 @@ class ProductFilterManager
                 }
             }
         } else {
-            if (isSelected) {
-                productFilterCategoryItemOld
-                    .productFilterItemList
-                    .find { it.value == productItemValue }
-                    ?.isSelected = isSelected
-            } else {
-                productFilterCategoryItemOld
-                    .productFilterItemList
-                    .apply {
-                        toArrayList()
-                            .remove(
-                                find {
-                                    it.value == productItemValue
-                                }
-                            )
-                    }
-            }
+            productFilterCategoryItemOld
+                .productFilterItemList
+                .find { it.value == productItemValue }
+                ?.isSelected = isSelected
         }
     }
 
