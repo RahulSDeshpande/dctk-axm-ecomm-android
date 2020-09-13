@@ -13,7 +13,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import com.rahulografy.axmecomm.R
 import com.rahulografy.axmecomm.di.ActivityScoped
+import com.rahulografy.axmecomm.util.ext.toast
+import com.rahulografy.axmecomm.util.isNetworkAvailable
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -109,4 +112,11 @@ abstract class BaseFragment<VDB : ViewDataBinding, BVM : BaseViewModel> : Dagger
         viewModel.stop()
         super.onDestroyView()
     }
+
+    fun isNetworkAvailable() =
+        isNetworkAvailable(context).apply {
+            if (not()) {
+                toast(getString(R.string.msg_no_internet))
+            }
+        }
 }

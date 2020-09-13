@@ -33,35 +33,48 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (viewModel.isDataProcessing.get()) {
-            toast("Data is being fetched, please wait...")
+            toast(getString(R.string.msg_fetching_data_please_wait))
         } else {
             when (item.itemId) {
-                R.id.menu_action_search -> openProductFilterFragment()
-                R.id.menu_action_filter -> {
-                }
-                R.id.menu_action_cart -> {
-                }
+                R.id.menu_action_search, R.id.menu_action_filter -> openProductFilterFragment()
+                R.id.menu_action_cart -> toast("WIP")
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun initUi() {
-        viewModel.getProducts()
+        if (isNetworkAvailable()) {
+            viewModel.getProducts()
+        }
     }
 
     override fun initSharedViewModelObservers() {
 
-        viewModel
-            .productManager
-            .mapCategoryWiseProductItems
-            .observe(
-                lifecycleOwner = this,
-                observer = Observer {
-                    initViewPager(categories = it?.keys)
-                    viewModel.isDataProcessing.set(false)
-                }
-            )
+        viewModel.apply {
+            productManager
+                .mapCategoryWiseProductItemListFinal
+                .observe(
+                    lifecycleOwner = this@HomeFragment,
+                    observer = Observer {
+                        if (it != null) {
+                            initViewPager(categories = it?.keys)
+                            viewModel.isDataProcessing.set(false)
+                        }
+                    }
+                )
+
+            productFilterManager
+                .productFilterCategoryItemListFinalChangeEvent
+                .observe(
+                    lifecycleOwner = this@HomeFragment,
+                    observer = Observer {
+                        if (it != null && it) {
+                            productManager.updateProductItemListFinalBasedOnFilter()
+                        }
+                    }
+                )
+        }
     }
 
     private fun initViewPager(categories: Collection<String>?) {
