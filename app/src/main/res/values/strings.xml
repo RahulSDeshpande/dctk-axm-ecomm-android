@@ -7,4 +7,7 @@
     <string name="filter">Filter</string>
     <string name="cancel">Cancel</string>
     <string name="filter_products">Filter Products</string>
+    <string name="reset">Reset</string>
+    <string name="msg_fetching_data_please_wait">Data is being fetched, please wait…</string>
+    <string name="msg_no_internet">Your device is offline.\nPlease connect to the internet.</string>
 </resources>

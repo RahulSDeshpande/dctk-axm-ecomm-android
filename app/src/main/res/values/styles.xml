@@ -18,7 +18,6 @@
         <item name="chipBackgroundColor">@color/selector_chip_background</item>
         <item name="colorOnSurface">@color/colorPrimary</item>
         <item name="android:textColor">@color/colorChipText</item>
-        <item name="android:textAppearance">@style/BaseChipTextStyle</item>
         <item name="chipEndPadding">@dimen/space_small</item>
         <item name="chipStartPadding">@dimen/space_small</item>
         <item name="android:clickable">true</item>
