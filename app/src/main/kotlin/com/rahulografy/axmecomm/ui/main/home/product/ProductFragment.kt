@@ -35,31 +35,31 @@ class ProductFragment : BaseFragment<FragmentProductBinding, ProductFragmentView
 
         val productCategory = arguments?.getString(ARG_PRODUCT_CATEGORY)
 
-        initProductList(viewModel.getProductsFiltered(productCategory))
+        initProductList(viewModel.getProductItemListByCategory(productCategory))
     }
 
-    private fun initProductList(listProductItem: List<ProductItem>?) {
-
-        if (listProductItem.isNullOrEmpty().not()) {
+    private fun initProductList(productItemList: List<ProductItem>?) {
+        if (productItemList.isNullOrEmpty().not()) {
             viewDataBinding.apply {
                 productAdapter = ProductAdapter(productFragmentViewModel = viewModel)
                 executePendingBindings()
             }
 
-            viewModel.products.set(Products(listProductItem))
+            viewModel.products.set(Products(productItemList))
         }
     }
 
     override fun initSharedViewModelObservers() {
-        viewModel
-            .productClickEvent
-            .observe(
-                lifecycleOwner = this,
-                observer = Observer { productItem ->
-                    productItem?.let {
-                        toast(text = "Phone: ${productItem.phone}")
+        viewModel.apply {
+            productClickEvent
+                .observe(
+                    lifecycleOwner = this@ProductFragment,
+                    observer = Observer { productItem ->
+                        productItem?.let {
+                            toast(text = "Phone: ${productItem.phone}")
+                        }
                     }
-                }
-            )
+                )
+        }
     }
 }

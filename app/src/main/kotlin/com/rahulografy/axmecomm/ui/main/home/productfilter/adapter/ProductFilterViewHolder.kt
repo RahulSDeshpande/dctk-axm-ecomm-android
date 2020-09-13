@@ -6,7 +6,6 @@ import com.rahulografy.axmecomm.databinding.ItemProductFilterType1Binding
 import com.rahulografy.axmecomm.ui.main.home.productfilter.listener.ProductFilterEventListener
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterCategoryItem
 import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterType
-import com.rahulografy.axmecomm.util.ext.toast
 
 class ProductFilterViewHolder(
     private val binding: ItemProductFilterType1Binding
@@ -24,30 +23,56 @@ class ProductFilterViewHolder(
 
         initProductFilterItemsChipGroup(
             binding = binding,
-            productFilterCategoryItem = productFilterCategoryItem
+            productFilterCategoryItem = productFilterCategoryItem,
+            productFilterEventListener = productFilterEventListener
         )
     }
 
     private fun initProductFilterItemsChipGroup(
         binding: ItemProductFilterType1Binding,
-        productFilterCategoryItem: ProductFilterCategoryItem
+        productFilterCategoryItem: ProductFilterCategoryItem,
+        productFilterEventListener: ProductFilterEventListener?
     ) {
         binding.chipGroupProductFilter.apply {
+
             productFilterCategoryItem.apply {
-                listProductFilterItem.forEachIndexed { _, productFilterItem ->
-                    val chipProductFilter = Chip(context)
-                    chipProductFilter.id = productFilterItem.id
-                    chipProductFilter.text = productFilterItem.value
-                    addView(chipProductFilter)
-                }
 
-                isSingleSelection = productFilterType == ProductFilterType.SELECTION_SINGLE
+                productFilterItemList.forEachIndexed { _, productFilterItem ->
 
-                setOnCheckedChangeListener { _, checkedId ->
-                    if (checkedId >= 0) {
-                        context.toast(listProductFilterItem[checkedId].value)
+                    Chip(context).apply {
+
+                        id = productFilterItem.id
+                        text = productFilterItem.value
+
+                        setOnCheckedChangeListener { _, isChecked ->
+
+                            productFilterEventListener?.onProductFilterItemSelected(
+                                productFilterCategoryItem = productFilterCategoryItem,
+                                productCategoryItemId = productFilterCategoryItem.id,
+                                productCategoryItemValue = productFilterCategoryItem.value,
+                                productItemId = productFilterItem.id,
+                                productItemValue = productFilterItem.value,
+                                isSelected = isChecked
+                            )
+                        }
+
+                        addView(this)
                     }
                 }
+
+                (productFilterType == ProductFilterType.SELECTION_SINGLE).let {
+                    isSingleSelection = it
+                    isSelectionRequired = it
+                }
+
+//                setOnCheckedChangeListener { _, checkedId ->
+//                    if (checkedId >= 0) {
+//                        productFilterCategoryItem.productFilterItemList[adapterPosition].isSelected=checkedId
+//                        productFilterEventListener?.onProductFilterItemSelected(
+//                            productFilterCategoryItem
+//                        )
+//                    }
+//                }
             }
         }
     }

@@ -21,13 +21,31 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvProductFilterTitle"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/space_small"
             android:fontFamily="@font/sans_bold"
             android:padding="@dimen/space_normal"
             android:text="@string/filter_products"
             android:textColor="@color/default_text_color_1"
             android:textSize="@dimen/text_xlarge"
+            app:layout_constraintEnd_toStartOf="@+id/buttonProductFilterSaveTop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonProductFilterSaveTop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_tiny"
+            android:layout_marginEnd="@dimen/space_small"
+            android:layout_marginBottom="@dimen/space_tiny"
+            android:backgroundTint="@color/colorPrimary"
+            android:fontFamily="@font/sans_bold"
+            android:onClick="@{() -> viewModel.saveProductFilter()}"
+            android:text="@string/filter"
+            android:textColor="@color/default_text_color_white"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
@@ -46,7 +64,7 @@
                     android:clipToPadding="false"
                     android:nestedScrollingEnabled="false"
                     app:adapter="@{productFilterAdapter}"
-                    app:items="@{viewModel.listProductFilterCategoryItem}"
+                    app:items="@{viewModel.productFilterCategoryItemList}"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:itemCount="5"
                     tools:listitem="@layout/item_product_filter_type_1" />
@@ -57,12 +75,29 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/space_normal"
                     android:backgroundTint="@color/colorPrimary"
-                    android:onClick="@{() -> viewModel.saveProductFilter(false)}"
+                    android:fontFamily="@font/sans_bold"
+                    android:onClick="@{() -> viewModel.cancelProductFilter()}"
                     android:text="@string/cancel"
                     android:textColor="@color/default_text_color_white"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/buttonProductFilterSave"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonProductFilterReset"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvProductFilter" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buttonProductFilterReset"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/space_normal"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:fontFamily="@font/sans_bold"
+                    android:onClick="@{() -> viewModel.resetProductFilter()}"
+                    android:text="@string/reset"
+                    android:textColor="@color/default_text_color_white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonProductFilterSave"
+                    app:layout_constraintStart_toEndOf="@+id/buttonProductFilterCancel"
                     app:layout_constraintTop_toBottomOf="@+id/rvProductFilter" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -71,12 +106,13 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/space_normal"
                     android:backgroundTint="@color/colorPrimary"
-                    android:onClick="@{() -> viewModel.saveProductFilter(true)}"
+                    android:onClick="@{() -> viewModel.saveProductFilter()}"
                     android:text="@string/filter"
                     android:textColor="@color/default_text_color_white"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/buttonProductFilterCancel"
+                    app:layout_constraintStart_toEndOf="@+id/buttonProductFilterReset"
                     app:layout_constraintTop_toBottomOf="@+id/rvProductFilter" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

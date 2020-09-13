@@ -11,7 +11,7 @@ import com.rahulografy.axmecomm.ui.main.home.productfilter.model.ProductFilterCa
 
 // TODO | WIP | CREATE A BaseAdapter WHICH SHOULD HAVE ALL COMMON ADAPTER FEATURES
 class ProductFilterAdapter(
-    private var listProductFilterCategoryItem: ArrayList<ProductFilterCategoryItem> = arrayListOf(),
+    private var productFilterCategoryItemList: ArrayList<ProductFilterCategoryItem> = arrayListOf(),
     private val productFragmentViewModel: ProductFilterFragmentViewModel?
 ) : BaseListAdapter<ProductFilterCategoryItem, ProductFilterViewHolder>(
     ProductFilterCategoryDiffUtilItemCallback()
@@ -26,27 +26,55 @@ class ProductFilterAdapter(
             )
         )
 
-    override fun getItemCount() = listProductFilterCategoryItem.size
+    override fun getItemCount() = productFilterCategoryItemList.size
 
     override fun onBindViewHolder(viewHolder: ProductFilterViewHolder, position: Int) =
         viewHolder.bind(
-            productFilterCategoryItem = listProductFilterCategoryItem[position],
+            productFilterCategoryItem = productFilterCategoryItemList[position],
             productFilterEventListener = object : ProductFilterEventListener {
-                override fun onFilterCancelled() {}
-                override fun onFilterSaved() {}
+
+                override fun onProductFilterItemSelected(
+                    productFilterCategoryItem: ProductFilterCategoryItem,
+                    productCategoryItemId: Int,
+                    productCategoryItemValue: String,
+                    productItemId: Int,
+                    productItemValue: String,
+                    isSelected: Boolean
+                ) {
+                    productFragmentViewModel?.onProductFilterItemSelected(
+                        productCategoryItemId = productCategoryItemId,
+                        productCategoryItemValue = productCategoryItemValue,
+                        productItemId = productItemId,
+                        productItemValue = productItemValue,
+                        productFilterCategoryItem = productFilterCategoryItem,
+                        isSelected = isSelected
+                    )
+                }
+
+                override fun onProductFilterSaved() {
+                    productFragmentViewModel?.saveProductFilter()
+                }
+
+                override fun onProductFilterCancelled() {
+                    productFragmentViewModel?.cancelProductFilter()
+                }
+
+                override fun onProductFilterReset() {
+                    productFragmentViewModel?.resetProductFilter()
+                }
             }
         )
 
     override fun setData(data: List<ProductFilterCategoryItem>?) {
-        listProductFilterCategoryItem.clear()
-        data?.let { listProductFilterCategoryItem.addAll(it) }
-        submitList(listProductFilterCategoryItem)
+        productFilterCategoryItemList.clear()
+        data?.let { productFilterCategoryItemList.addAll(it) }
+        submitList(productFilterCategoryItemList)
     }
 
     override fun addData(data: List<ProductFilterCategoryItem>?) {
         data?.let {
-            listProductFilterCategoryItem.addAll(it)
-            submitList(listProductFilterCategoryItem)
+            productFilterCategoryItemList.addAll(it)
+            submitList(productFilterCategoryItemList)
         }
     }
 }

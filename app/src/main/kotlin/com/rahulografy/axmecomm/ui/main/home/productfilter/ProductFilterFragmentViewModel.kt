@@ -12,14 +12,44 @@ class ProductFilterFragmentViewModel
     private val productFilterManager: ProductFilterManager
 ) : BaseViewModel() {
 
-    val listProductFilterCategoryItem = ObservableField<List<ProductFilterCategoryItem>>()
+    val productFilterCategoryItemList = ObservableField<List<ProductFilterCategoryItem>>()
 
-    val saveProductFilterEvent = SingleLiveEvent<Boolean>()
+    val productFilterSaveEvent = SingleLiveEvent<Boolean>()
+    val productFilterCancelEvent = SingleLiveEvent<Boolean>()
+    val productFilterResetEvent = SingleLiveEvent<Boolean>()
 
-    fun getProductFilterCategoryItemList() =
-        productFilterManager.listProductFilterCategoryItem.value
+    fun getProductFilterCategoryItemList() = productFilterManager.productFilterCategoryItemListFinal
 
-    fun saveProductFilter(save: Boolean) {
-        saveProductFilterEvent.value = save
+    fun onProductFilterItemSelected(
+        productFilterCategoryItem: ProductFilterCategoryItem,
+        productCategoryItemId: Int,
+        productCategoryItemValue: String,
+        productItemId: Int,
+        productItemValue: String,
+        isSelected: Boolean
+    ) {
+        productFilterManager.onProductFilterItemSelected(
+            productCategoryItemId = productCategoryItemId,
+            productCategoryItemValue = productCategoryItemValue,
+            productItemId = productItemId,
+            productItemValue = productItemValue,
+            productFilterCategoryItem = productFilterCategoryItem,
+            isSelected = isSelected
+        )
+    }
+
+    fun saveProductFilter() {
+        productFilterManager.updateProductFilterCategoryItemListTempToFinal()
+        productFilterSaveEvent.value = true
+    }
+
+    fun cancelProductFilter() {
+        productFilterManager.resetProductFilterCategoryItemListTemp()
+        productFilterCancelEvent.value = true
+    }
+
+    fun resetProductFilter() {
+        productFilterManager.resetProductFilterCategoryItemListTempAndFinal()
+        productFilterResetEvent.value = true
     }
 }

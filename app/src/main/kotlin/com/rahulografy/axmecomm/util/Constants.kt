@@ -20,9 +20,9 @@ object Constants {
         // TODO | MY PERSONAL MOCK API AS Axm's JSONBIN IS DOWN
         object Api {
 
-            const val URL_BASE = "https://run.mocky.io/v3/ceaf40f8-0a4b-4eaf-b368-bd356bc64523/"
+            const val URL_BASE = "https://demo5682608.mockable.io/"
 
-            const val URL_GET_PRODUCTS = " "
+            const val URL_GET_PRODUCTS = "axm-products"
 
             const val HEADER_SECRET_KEY_KEY = "secret-key"
 

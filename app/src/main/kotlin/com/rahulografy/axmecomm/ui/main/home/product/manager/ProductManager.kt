@@ -9,6 +9,8 @@ import com.rahulografy.axmecomm.ui.main.home.product.model.ProductItem
 import com.rahulografy.axmecomm.ui.main.home.product.model.Products
 import com.rahulografy.axmecomm.ui.main.home.productfilter.manager.ProductFilterManager
 import com.rahulografy.axmecomm.util.SingleLiveEvent
+import com.rahulografy.axmecomm.util.ext.toArrayList
+import com.rahulografy.axmecomm.util.ext.toHashMap
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -21,13 +23,15 @@ class ProductManager
     private val productFilterManager: ProductFilterManager
 ) : BaseViewModel() {
 
-    private var products = SingleLiveEvent<Products?>()
+    private var products: Products? = null
 
-    var mapCategoryWiseProductItems = SingleLiveEvent<Map<String, List<ProductItem>>?>()
+    private var mapCategoryWiseProductItemListBackup: HashMap<String, List<ProductItem>>? = null
+
+    var mapCategoryWiseProductItemListFinal = SingleLiveEvent<HashMap<String, List<ProductItem>>?>()
 
     fun getProducts(forceApi: Boolean = false) {
 
-        if (forceApi || products.value?.products.isNullOrEmpty()) {
+        if (forceApi || products?.products.isNullOrEmpty()) {
             addDisposable(
                 disposable = productsRepository
                     .getProducts()
@@ -36,23 +40,85 @@ class ProductManager
                     .subscribe({
                         onProductsReceived(it)
                     }, { error ->
-                        products.reset()
+                        products = null
                         error.printStackTrace()
                     })
             )
         } else {
-            mapCategoryWiseProductItems.value = mapCategoryWiseProductItems.value
+            mapCategoryWiseProductItemListFinal.value = mapCategoryWiseProductItemListFinal.value
         }
     }
 
     private fun onProductsReceived(productsResponse: ProductsResponse?) {
-        products.value = productMapper.map(input = productsResponse)
+        products = productMapper.map(input = productsResponse)
 
-        mapCategoryWiseProductItems.value = productMapper.groupByCategory(products.value?.products)
+        mapCategoryWiseProductItemListBackup =
+            productMapper.groupByCategory(products?.products)?.toHashMap()
 
-        productFilterManager.init(products.value?.products)
+        mapCategoryWiseProductItemListFinal.value =
+            productMapper.groupByCategory(products?.products)?.toHashMap()
+
+        productFilterManager.init(products?.products)
     }
 
-    fun getProductsByCategory(category: String?) =
-        mapCategoryWiseProductItems.value?.get(category)
+    fun getProductItemList(category: String?) =
+        mapCategoryWiseProductItemListFinal.value?.get(category)
+
+    fun updateProductItemListFinalBasedOnFilter() {
+        productFilterManager.productFilterCategoryItemListFinal
+
+        val mapCategoryWiseProductItemListFinalNew =
+            mapCategoryWiseProductItemListFinal.value.toHashMap()
+
+        mapCategoryWiseProductItemListBackup?.forEach {
+
+            var productItemListFinalNew =
+                mapCategoryWiseProductItemListFinalNew[it.key].toArrayList()
+
+            productItemListFinalNew.clear()
+
+            productItemListFinalNew = updateProductItemListBackupToFinal(
+                productItemListBackup = it.value.toArrayList(),
+                productItemListFinal = productItemListFinalNew
+            )
+
+            mapCategoryWiseProductItemListFinalNew[it.key] = productItemListFinalNew
+        }
+
+        mapCategoryWiseProductItemListFinal.value = mapCategoryWiseProductItemListFinalNew
+    }
+
+    private fun updateProductItemListBackupToFinal(
+        productItemListBackup: ArrayList<ProductItem>?,
+        productItemListFinal: ArrayList<ProductItem>
+    ): ArrayList<ProductItem> {
+
+        if (productItemListBackup.isNullOrEmpty()) {
+            return arrayListOf()
+        }
+
+        productItemListBackup.forEach {
+            val productFilterValueMapFinal =
+                productFilterManager.productFilterCategoryWiseProductFilterValueMapFinal
+
+            val phoneList = productFilterValueMapFinal["phone"]
+            val priceList = productFilterValueMapFinal["price"]
+            val simList = productFilterValueMapFinal["sim"]
+            val gpsList = productFilterValueMapFinal["gps"]
+            val audioJackList = productFilterValueMapFinal["audioJack"]
+
+            val ignoreFilter = true
+
+            if (((phoneList.isNullOrEmpty() && ignoreFilter) || phoneList!!.contains(it.phone))
+                && ((priceList.isNullOrEmpty() && ignoreFilter) || priceList!!.contains(it.priceEurInt.toString()))
+                && ((simList.isNullOrEmpty() && ignoreFilter) || simList!!.contains(it.sim))
+                && ((gpsList.isNullOrEmpty() && ignoreFilter) || gpsList!!.contains(it.gps))
+                && ((audioJackList.isNullOrEmpty() && ignoreFilter) || audioJackList!!.contains(it.audioJack))
+            ) {
+                productItemListFinal.add(it)
+            }
+        }
+
+        return productItemListFinal
+    }
 }
