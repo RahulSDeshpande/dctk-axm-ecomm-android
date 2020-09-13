@@ -160,7 +160,7 @@ class ProductFilterManager
             productFilterCategoryWiseProductFilterValueMapFinal
         )
 
-        productFilterCategoryItemListFinalChangeEvent.value = true
+        postProductFilterChangeEvent()
     }
 
     fun resetProductFilterCategoryItemListTempAndFinal() {
@@ -168,10 +168,16 @@ class ProductFilterManager
         productFilterCategoryWiseProductFilterValueMapFinal.clear()
         resetProductFilterCategoryItemListTemp()
 
-        productFilterCategoryItemListFinalChangeEvent.value = true
+        postProductFilterChangeEvent()
     }
 
     fun resetProductFilterCategoryItemListTemp() {
         productFilterCategoryItemListTemp.clear()
+    }
+
+    private fun postProductFilterChangeEvent(force: Boolean = true) {
+        if (force || productFilterCategoryWiseProductFilterValueMapFinal.isNotEmpty()) {
+            productFilterCategoryItemListFinalChangeEvent.value = true
+        }
     }
 }
