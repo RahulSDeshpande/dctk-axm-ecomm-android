@@ -165,7 +165,10 @@ class ProductFilterManager
 
     fun resetProductFilterCategoryItemListTempAndFinal() {
         productFilterMapper.resetProductFilterCategoryItemList(productFilterCategoryItemListFinal)
+        productFilterCategoryWiseProductFilterValueMapFinal.clear()
         resetProductFilterCategoryItemListTemp()
+
+        productFilterCategoryItemListFinalChangeEvent.value = true
     }
 
     fun resetProductFilterCategoryItemListTemp() {

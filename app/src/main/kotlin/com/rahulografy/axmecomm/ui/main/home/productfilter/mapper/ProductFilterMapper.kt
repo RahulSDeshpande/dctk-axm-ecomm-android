@@ -170,10 +170,6 @@ class ProductFilterMapper
         }
         list.addIfNotExists(filterValue)
         productFilterCategoryWiseProductFilterValueMapFinal[categoryValue] = list
-
-//        productFilterCategoryWiseProductFilterValueMapFinal[categoryValue]
-//            .toArrayList()
-//            .addIfNotExists(filterValue)
     }
 
     fun resetProductFilterCategoryItemList(productFilterCategoryItemList: List<ProductFilterCategoryItem>) {
