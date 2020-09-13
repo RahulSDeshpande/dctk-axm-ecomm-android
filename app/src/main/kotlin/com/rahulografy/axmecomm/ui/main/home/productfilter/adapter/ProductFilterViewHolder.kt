@@ -43,6 +43,7 @@ class ProductFilterViewHolder(
 
                         id = productFilterItem.id
                         text = productFilterItem.value
+                        isChecked = productFilterItem.isSelected
 
                         setOnCheckedChangeListener { _, isChecked ->
 
